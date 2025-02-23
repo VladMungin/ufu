@@ -1,0 +1,28 @@
+.ant-input {
+  border: none !important;
+  border-bottom: 1px solid #cac4d0 !important;
+  border-radius: 0 !important;
+}
+
+.ant-input::placeholder {
+  padding: 12px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #79747e;
+}
+
+.ant-input:focus {
+  background: none !important;
+  border: none !important;
+  border-bottom: 1px solid #cac4d0 !important;
+  border-radius: 0 !important;
+}
+
+.ant-input-outlined {
+  background: none !important;
+  border: none !important;
+  border-bottom: 1px solid #cac4d0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
