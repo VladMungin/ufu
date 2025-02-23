@@ -13,6 +13,8 @@ const style: React.CSSProperties = {
 
 const generateField = (type: string, description: string, field: ControllerRenderProps, options?: Option[]) => {
   switch (type) {
+    case 'term':
+      return <p>{description}</p>
     case 'text':
       return (
         <Input
@@ -91,6 +93,7 @@ const generateField = (type: string, description: string, field: ControllerRende
           }))}
         />
       )
+
     default:
       return (
         <Input
