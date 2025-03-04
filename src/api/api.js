@@ -1,7 +1,6 @@
 import axios from 'axios'
-import { RegisterData } from './types'
 
-export const queryRegister = async ({ email, password }: RegisterData) => {
+export const queryRegister = async ({ email, password }) => {
   const res = await axios.post(`${import.meta.env.VITE_AUTH_API}/auth/register`, {
     email,
     password,
@@ -10,7 +9,7 @@ export const queryRegister = async ({ email, password }: RegisterData) => {
   return res.data
 }
 
-export const queryLogin = async ({ email, password }: RegisterData) => {
+export const queryLogin = async ({ email, password }) => {
   const res = await axios.post(`${import.meta.env.VITE_AUTH_API}/auth/login`, {
     email,
     password,
@@ -19,19 +18,19 @@ export const queryLogin = async ({ email, password }: RegisterData) => {
   return res.data
 }
 
-export const queryRefetchAccessToken = async (refreshToken: string) => {
+export const queryRefetchAccessToken = async (refreshToken) => {
   const res = await axios.post(`${import.meta.env.VITE_AUTH_API}/auth/refresh-token`, { refreshToken })
 
   return res.data
 }
 
-export const querySurvey = async (token: string, id: string) => {
+export const querySurvey = async (token, id) => {
   const res = await axios.get(`${import.meta.env.VITE_DATA_API}:3000/surveys/${id}`)
 
   return res.data
 }
 
-export const querySurveyNext = async (id: string, stages: any[]) => {
+export const querySurveyNext = async (id, stages) => {
   const res = await axios.post(`${import.meta.env.VITE_DATA_API}:3000/surveys/${id}/next_stage`, {
     stages,
   })
@@ -39,7 +38,7 @@ export const querySurveyNext = async (id: string, stages: any[]) => {
   return res.data
 }
 
-export const queryDocumentPreview = async (id: string, stages: any[]) => {
+export const queryDocumentPreview = async (id, stages) => {
   const res = await axios.post(
     `${import.meta.env.VITE_DATA_API}:3000/surveys/${id}/document_preview`,
     {
@@ -55,7 +54,7 @@ export const queryDocumentPreview = async (id: string, stages: any[]) => {
   return res.data
 }
 
-export const querySuggestDocuments = async (request: string) => {
+export const querySuggestDocuments = async (request) => {
   const res = await axios.post(`${import.meta.env.VITE_DATA_API}:3000/suggested_documents`, {
     request,
   })

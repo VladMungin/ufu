@@ -6,7 +6,7 @@ import { querySuggestDocuments } from '../../api/api'
 import './style.css'
 
 const Search = () => {
-  const { control, watch, handleSubmit } = useForm<{ 'doc-name': string }>()
+  const { control, watch, handleSubmit } = useForm()
   const isDisabled = !watch('doc-name')
 
   const { mutateAsync } = useMutation({
@@ -14,7 +14,7 @@ const Search = () => {
     mutationKey: ['doc-name'],
   })
 
-  const onSubmit = (data: { 'doc-name': string }) => {
+  const onSubmit = (data) => {
     const res = mutateAsync(data['doc-name'])
     console.log(res)
   }

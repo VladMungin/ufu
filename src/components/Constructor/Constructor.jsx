@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai'
 import { pdfAtom } from '../../store/store'
-import Form from '../Form/Form'
+import Form from '../Form/Form.jsx'
 const Constructor = () => {
   const [pdf] = useAtom(pdfAtom)
   console.log(pdf)

@@ -10,8 +10,6 @@ import { pdfAtom } from '../../store/store'
 import StepFrom from './FormSteps/FirstStep'
 import { transformData } from './FormSteps/lib/transform'
 
-export type FormInputs = Record<string, unknown>
-
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
   const setPdf = useSetAtom(pdfAtom)
@@ -37,12 +35,12 @@ const Form = () => {
 
   const { mutateAsync, data: nextStageData } = useMutation({
     mutationKey: ['next-stage', document_id],
-    mutationFn: ({ id, stages }: { id: string; stages: any[] }) => querySurveyNext(id, stages),
+    mutationFn: ({ id, stages }) => querySurveyNext(id, stages),
   })
 
-  const { mutateAsync: getDocumentPreview, data: documentPreview } = useMutation({
+  const { mutateAsync: getDocumentPreview, data } = useMutation({
     mutationKey: ['document-preview', document_id],
-    mutationFn: ({ id, stages }: { id: string; stages: any[] }) => queryDocumentPreview(id, stages),
+    mutationFn: ({ id, stages }) => queryDocumentPreview(id, stages),
     onSuccess: (data) => {
       setPdf(data.filename)
     },
@@ -50,7 +48,7 @@ const Form = () => {
 
   const { Step } = Steps
   const [currentStep, setCurrentStep] = useState(0)
-  const { control, getValues } = useForm<FormInputs>()
+  const { control, getValues } = useForm()
 
   const [stages, setStages] = useState([])
 
@@ -60,11 +58,11 @@ const Form = () => {
       currentStep === 0 ? transformData(documentData, getValues()) : transformData(nextStageData, getValues())
 
     await mutateAsync({
-      id: document_id as string,
+      id: document_id,
       stages: [...stages, ...dataToQuery],
     })
     await getDocumentPreview({
-      id: document_id as string,
+      id: document_id,
       stages: [...stages, ...dataToQuery],
     })
 
@@ -81,7 +79,7 @@ const Form = () => {
 
   const prev = () => setCurrentStep(currentStep - 1)
 
-  const renderStep = (step: number) => {
+  const renderStep = (step) => {
     switch (step) {
       case 0:
         return <StepFrom control={control} data={documentData} />

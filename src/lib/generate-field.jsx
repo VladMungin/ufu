@@ -1,17 +1,15 @@
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { Input, Radio } from 'antd'
-import { ControllerRenderProps } from 'react-hook-form'
 import { DateRangePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
-import { Option } from '../api/types'
 
-const style: React.CSSProperties = {
+const style = {
   display: 'flex',
   flexDirection: 'column',
   gap: 8,
 }
 
-const generateField = (type: string, description: string, field: ControllerRenderProps, options?: Option[]) => {
+const generateField = (type, description, field, options) => {
   switch (type) {
     case 'term':
       return <p>{description}</p>
