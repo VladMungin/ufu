@@ -1,3 +1,3 @@
 import { atom } from 'jotai'
 
-export const htmlAtom = atom('')
+export const pdfAtom = atom('')

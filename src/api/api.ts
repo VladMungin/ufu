@@ -31,7 +31,7 @@ export const querySurvey = async (token: string, id: string) => {
   return res.data
 }
 
-export const querySurveyNext = async (id: string, stages) => {
+export const querySurveyNext = async (id: string, stages: any[]) => {
   const res = await axios.post(`${import.meta.env.VITE_DATA_API}:3000/surveys/${id}/next_stage`, {
     stages,
   })
@@ -39,48 +39,19 @@ export const querySurveyNext = async (id: string, stages) => {
   return res.data
 }
 
-export const querySurveyNewTemplate = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_DATA_API}/survey/new_template_part`)
-
-  return res.data
-}
-
-export const querySurveyInfo = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_DATA_API}/survey/info_from_external_source`)
-
-  return res.data
-}
-
-export const queryGetDocument = async (token: string, number_of_document: number) => {
-  // const [access_token] = useCookies(['access_token'])
-  // console.log(access_token.access_token)
-  const res = await axios.get(`${import.meta.env.VITE_DATA_API}:8080/constructor/documents/${number_of_document}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+export const queryDocumentPreview = async (id: string, stages: any[]) => {
+  const res = await axios.post(
+    `${import.meta.env.VITE_DATA_API}:3000/surveys/${id}/document_preview`,
+    {
+      stages,
     },
-  })
-
-  return res.data
-}
-
-export const queryJSON = async (token: string, name: string) => {
-  const res = await axios.get(`${import.meta.env.VITE_DATA_API}:8080/${name}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+    {
+      headers: {
+        responseType: 'blob', // important
+      },
     },
-  })
-  // console.log(res)
-  return res.data
-}
+  )
 
-export const queryHTML = async (token: string, name: string) => {
-  // console.log(name)
-  const res = await axios.get(`${import.meta.env.VITE_DATA_API}:8080/${name}.html`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  // console.log(res)
   return res.data
 }
 

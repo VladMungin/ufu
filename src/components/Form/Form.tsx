@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Button, Steps } from 'antd'
+import { useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
-import { querySurvey, querySurveyNext } from '../../api/api'
+import { queryDocumentPreview, querySurvey, querySurveyNext } from '../../api/api'
+import { pdfAtom } from '../../store/store'
 import StepFrom from './FormSteps/FirstStep'
 import { transformData } from './FormSteps/lib/transform'
 
@@ -12,7 +14,7 @@ export type FormInputs = Record<string, unknown>
 
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
-
+  const setPdf = useSetAtom(pdfAtom)
   const [params] = useSearchParams()
 
   const document_id = params.get('document_id')
@@ -35,12 +37,20 @@ const Form = () => {
 
   const { mutateAsync, data: nextStageData } = useMutation({
     mutationKey: ['next-stage', document_id],
-    mutationFn: ({ id, stages }: { id: string; stages: any }) => querySurveyNext(id, stages),
+    mutationFn: ({ id, stages }: { id: string; stages: any[] }) => querySurveyNext(id, stages),
+  })
+
+  const { mutateAsync: getDocumentPreview, data: documentPreview } = useMutation({
+    mutationKey: ['document-preview', document_id],
+    mutationFn: ({ id, stages }: { id: string; stages: any[] }) => queryDocumentPreview(id, stages),
+    onSuccess: (data) => {
+      setPdf(data.filename)
+    },
   })
 
   const { Step } = Steps
   const [currentStep, setCurrentStep] = useState(0)
-  const { control, handleSubmit, watch, getValues } = useForm<FormInputs>()
+  const { control, getValues } = useForm<FormInputs>()
 
   const [stages, setStages] = useState([])
 
@@ -53,18 +63,21 @@ const Form = () => {
       id: document_id as string,
       stages: [...stages, ...dataToQuery],
     })
+    await getDocumentPreview({
+      id: document_id as string,
+      stages: [...stages, ...dataToQuery],
+    })
 
     setStages((prevStages) => [...prevStages, ...dataToQuery])
     setCurrentStep((prev) => prev + 1)
   }
 
   const [currentName, setCurrentName] = useState()
+  // console.log(documentPreview)
 
   useEffect(() => {
     if (isSuccess) setCurrentName(documentData.name)
   }, [status])
-
-  // console.log(documentData)
 
   const prev = () => setCurrentStep(currentStep - 1)
 
