@@ -32,7 +32,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
           }
           return {
             type: field.type,
-            value: dataFromForm[field.description],
+            input: dataFromForm[field.description] || '',
           }
         })
         .filter((field) => field !== undefined),

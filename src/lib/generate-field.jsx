@@ -1,6 +1,6 @@
 import { FormControl, Input, MenuItem, Select } from '@mui/material'
 import { Radio } from 'antd'
-import { DateRangePicker, TimeRangePicker } from 'rsuite'
+import { DatePicker, DateRangePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 
 const style = {
@@ -51,7 +51,7 @@ const generateField = (type, description, field, options) => {
       )
     case 'date':
       return (
-        <DateRangePicker
+        <DatePicker
           {...field}
           showOneCalendar
           placeholder={description}

@@ -45,6 +45,7 @@ const generateForms = (fields, control) => {
         </React.Fragment>
       )
     } else {
+      console.log(field)
       return (
         <React.Fragment key={index}>
           <p>{field.description}</p>
