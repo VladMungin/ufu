@@ -63,7 +63,7 @@ const generateField = (type: string, description: string, field: ControllerRende
     case 'select_single':
       return (
         <FormControl fullWidth>
-          <Select className="w-full" label={description} {...field}>
+          <Select className="" label={description} {...field}>
             {options?.map((item, index) => {
               if (item.edit_actions)
                 return (

@@ -1,5 +1,5 @@
 import { useCookies } from 'react-cookie'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Constructor from '../components/Constructor/Constructor'
 import Home from '../components/Home/Home'
 import Login from '../components/Login/Login'
@@ -14,7 +14,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route index path="/" element={<Home />} />
-      <Route path="/constructor" element={shouldRedirect ? <Navigate replace to="/register" /> : <Constructor />} />
+      <Route path="/constructor" element={<Constructor />} />
       <Route element={<Register />} path="register" />
       <Route element={<Login />} path="login" />
       <Route path="/search" element={<Search />} />
