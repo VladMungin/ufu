@@ -6,7 +6,7 @@ const Constructor = () => {
   console.log(pdf)
 
   return (
-    <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh]">
+    <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh] lg:flex-row flex-col">
       <Form />
       <div className="max-w-[880px] w-[100%]">
         <div className="relative h-full">
