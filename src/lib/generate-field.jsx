@@ -1,5 +1,5 @@
-import { FormControl, MenuItem, Select } from '@mui/material'
-import { Input, Radio } from 'antd'
+import { FormControl, Input, MenuItem, Select } from '@mui/material'
+import { Radio } from 'antd'
 import { DateRangePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 
@@ -52,6 +52,7 @@ const generateField = (type, description, field, options) => {
     case 'date':
       return (
         <DateRangePicker
+          {...field}
           showOneCalendar
           placeholder={description}
           ranges={[]}
@@ -61,7 +62,11 @@ const generateField = (type, description, field, options) => {
     case 'select_single':
       return (
         <FormControl fullWidth>
-          <Select className="w-full" label={description} {...field}>
+          <Select
+            className="border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+            label={description}
+            {...field}
+          >
             {options?.map((item, index) => {
               if (item.edit_actions)
                 return (

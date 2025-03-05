@@ -1,18 +1,26 @@
 .ant-radio-inner::after {
-	/* display: none !important; */
-	background-color: #5c5cff !important;
-	transform: scale(0.8) !important;
+  /* display: none !important; */
+  background-color: #5c5cff !important;
+  transform: scale(0.8) !important;
 }
 
 .ant-radio-inner {
-	/* display: none !important; */
-	background-color: #fff !important;
-	border-color: #5c5cff !important;
-	padding: 10px;
-	border: 2px #5c5cff solid !important;
+  /* display: none !important; */
+  background-color: #fff !important;
+  border-color: #5c5cff !important;
+  padding: 10px;
+  border: 2px #5c5cff solid !important;
 }
 
 .ant-select-selector {
-	border: none !important;
-	padding-left: 0 !important;
+  border: none !important;
+  padding-left: 0 !important;
+}
+
+.css-1cmet5c-MuiInputBase-root-MuiInput-root::before {
+  border: none !important;
+}
+
+.css-1cmet5c-MuiInputBase-root-MuiInput-root::after {
+  border: none !important;
 }

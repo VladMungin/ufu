@@ -7,7 +7,7 @@ const StepFrom = ({ data, control }) => {
 
   if (!data) return <>Загрузка</>
 
-  return <div className="">{generateForms(data.frontend_info.fields, control)}</div>
+  return <div className="flex flex-col">{generateForms(data.frontend_info.fields, control)}</div>
 }
 
 export default StepFrom
