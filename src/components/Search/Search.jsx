@@ -1,25 +1,21 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { useMutation } from '@tanstack/react-query'
 import { Button, Input } from 'antd'
-import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { querySuggestDocuments } from '../../api/api'
 import './style.css'
 
 const Search = () => {
-  const { control, watch, handleSubmit } = useForm<{ 'doc-name': string }>()
-  const [searchedDocument, setSearchedDocument] = useState()
+  const { control, watch, handleSubmit } = useForm()
   const isDisabled = !watch('doc-name')
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, data: searchedDocument } = useMutation({
     mutationFn: querySuggestDocuments,
     mutationKey: ['doc-name'],
-    onSuccess: (data) => {
-      setSearchedDocument(data)
-    },
   })
 
-  const onSubmit = (data: { 'doc-name': string }) => {
+  const onSubmit = (data) => {
     const res = mutateAsync(data['doc-name'])
   }
   console.log(searchedDocument)
@@ -61,14 +57,14 @@ const Search = () => {
           <div className="flex flex-col gap-3 mt-3">
             {searchedDocument &&
               searchedDocument.map((document) => (
-                <a
+                <Link
                   key={document.id}
-                  href={`/constructor?document_id=${document.id}`}
+                  to={`/constructor?document_id=${document.id}`}
                   className="flex gap-1.5 bg-white rounded-2xl shadow-[0px_0px_16px_0px_#95A1FF33] pl-3 pt-4 pb-4"
                 >
                   <img src="/note_alt.svg" />
                   {document.name}
-                </a>
+                </Link>
               ))}
           </div>
         </div>
@@ -76,7 +72,5 @@ const Search = () => {
     </div>
   )
 }
-
-// shadow-[0px_0px_16px_0px_149_161_255_0.2]
 
 export default Search

@@ -3,16 +3,15 @@ import { useCookies } from 'react-cookie'
 import { Controller, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { queryRegister } from '../../api/api'
-import { AuthResponse, RegisterData } from '../../api/types'
 import './Register.css'
 const Register = () => {
-  const { control, handleSubmit } = useForm<RegisterData>()
+  const { control, handleSubmit } = useForm()
   const [, setCookie] = useCookies(['access_token', 'refresh_token'])
   const navigate = useNavigate()
 
-  const onSubmit = async (data: RegisterData) => {
+  const onSubmit = async (data) => {
     try {
-      const res: AuthResponse = await queryRegister(data)
+      const res = await queryRegister(data)
       const { access_token, refresh_token } = res
 
       const expiresAccess = new Date()

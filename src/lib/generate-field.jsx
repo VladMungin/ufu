@@ -1,17 +1,15 @@
-import { FormControl, MenuItem, Select } from '@mui/material'
-import { Input, Radio } from 'antd'
-import { ControllerRenderProps } from 'react-hook-form'
+import { FormControl, Input, MenuItem, Select } from '@mui/material'
+import { Radio } from 'antd'
 import { DateRangePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
-import { Option } from '../api/types'
 
-const style: React.CSSProperties = {
+const style = {
   display: 'flex',
   flexDirection: 'column',
   gap: 8,
 }
 
-const generateField = (type: string, description: string, field: ControllerRenderProps, options?: Option[]) => {
+const generateField = (type, description, field, options) => {
   switch (type) {
     case 'term':
       return <p>{description}</p>
@@ -54,6 +52,7 @@ const generateField = (type: string, description: string, field: ControllerRende
     case 'date':
       return (
         <DateRangePicker
+          {...field}
           showOneCalendar
           placeholder={description}
           ranges={[]}
@@ -63,7 +62,11 @@ const generateField = (type: string, description: string, field: ControllerRende
     case 'select_single':
       return (
         <FormControl fullWidth>
-          <Select className="" label={description} {...field}>
+          <Select
+            className="border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+            label={description}
+            {...field}
+          >
             {options?.map((item, index) => {
               if (item.edit_actions)
                 return (

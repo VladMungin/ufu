@@ -1,9 +1,8 @@
 import React from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-import { Field } from '../api/types'
+import { Controller } from 'react-hook-form'
 import generateField from './generate-field'
 
-const generateForms = (fields: Field[], control: Control<unknown & FieldValues, unknown>) => {
+const generateForms = (fields, control) => {
   const form = fields.map((field, index) => {
     if (field.type === 'fields_group')
       return (

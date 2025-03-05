@@ -1,6 +1,4 @@
 export const transformData = (dataFromAPI, dataFromForm) => {
-  console.log(dataFromAPI, dataFromForm)
-
   return [
     {
       name: dataFromAPI.name,
