@@ -14,8 +14,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route index path="/" element={<Home />} />
-      <Route path="/constructor" element={<Constructor />} />
       <Route element={<Register />} path="register" />
+      <Route path="/constructor" element={shouldRedirect ? <Navigate replace to="/register" /> : <Constructor />} />
       <Route element={<Login />} path="login" />
       <Route path="/search" element={<Search />} />
     </Routes>
