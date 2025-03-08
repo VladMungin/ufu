@@ -53,7 +53,6 @@ const Form = () => {
   const [stages, setStages] = useState([])
 
   const next = async () => {
-    console.log(stages)
     const dataToQuery =
       currentStep === 0 ? transformData(documentData, getValues()) : transformData(nextStageData, getValues())
 

@@ -1,6 +1,7 @@
-import { FormControl, FormControlLabel, Input, MenuItem, Radio, RadioGroup, Select } from '@mui/material'
+import { FormControl, Input, MenuItem, Select } from '@mui/material'
 import { DatePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
+import { RadioGroup } from '../components/RadioGroup/RadioGroup'
 
 const style = {
   display: 'flex',
@@ -84,16 +85,9 @@ const generateField = (type, description, field, options) => {
         </FormControl>
       )
     case 'select_multiple':
+      console.log(field)
       console.log(options)
-      return (
-        <FormControl>
-          <RadioGroup {...field} defaultValue={options[0].text}>
-            {options.map((item) => {
-              return <FormControlLabel value={item.text} control={<Radio />} label={item.text} />
-            })}
-          </RadioGroup>
-        </FormControl>
-      )
+      return <RadioGroup {...field} options={options} />
 
     default:
       return (
