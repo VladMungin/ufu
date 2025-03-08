@@ -7,6 +7,18 @@ export const transformData = (dataFromAPI, dataFromForm) => {
           if (field.type === 'term') {
             return undefined // Пропускаем поле типа 'term'
           }
+          if (field.type === 'select_multiple') {
+            console.log(dataFromForm)
+            console.log(field)
+            return {
+              type: field.type,
+              chosen_options: [
+                {
+                  index: dataFromForm[field.description],
+                },
+              ],
+            }
+          }
           if (field.type === 'select_single') {
             return {
               type: field.type,

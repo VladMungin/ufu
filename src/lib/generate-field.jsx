@@ -1,6 +1,5 @@
-import { FormControl, Input, MenuItem, Select } from '@mui/material'
-import { Radio } from 'antd'
-import { DatePicker, DateRangePicker, TimeRangePicker } from 'rsuite'
+import { FormControl, FormControlLabel, Input, MenuItem, Radio, RadioGroup, Select } from '@mui/material'
+import { DatePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 
 const style = {
@@ -68,7 +67,7 @@ const generateField = (type, description, field, options) => {
             {...field}
           >
             {options?.map((item, index) => {
-              if (item.edit_actions)
+              if (item.edit_actionйцуйцуs)
                 return (
                   <MenuItem key={item.text} value={index}>
                     {item.edit_actions[0].text_to_insert}
@@ -87,14 +86,13 @@ const generateField = (type, description, field, options) => {
     case 'select_multiple':
       console.log(options)
       return (
-        <Radio.Group
-          {...field}
-          style={style}
-          options={options.map((item, index) => ({
-            value: item.text,
-            label: item.text,
-          }))}
-        />
+        <FormControl>
+          <RadioGroup {...field} defaultValue={options[0].text}>
+            {options.map((item) => {
+              return <FormControlLabel value={item.text} control={<Radio />} label={item.text} />
+            })}
+          </RadioGroup>
+        </FormControl>
       )
 
     default:
