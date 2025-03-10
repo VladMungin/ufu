@@ -13,7 +13,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
               type: field.type,
               chosen_options: [
                 {
-                  index: dataFromForm[field.description],
+                  index: dataFromForm[field.description.replaceAll('.', '')],
                 },
               ],
             }

@@ -1,5 +1,5 @@
 import { Radio, RadioGroup } from '@headlessui/react'
-import { FormControl, Input, MenuItem, Select } from '@mui/material'
+import { Input, MenuItem, Select } from '@mui/material'
 import cn from 'classnames'
 import React from 'react'
 import { DatePicker, TimeRangePicker } from 'rsuite'
@@ -11,7 +11,7 @@ const style = {
   gap: 8,
 }
 
-const GenerateField = ({type, description, field, options}) => {
+const GenerateField = ({ type, description, field, options }) => {
   switch (type) {
     case 'term':
       return <p>{description}</p>
@@ -63,26 +63,26 @@ const GenerateField = ({type, description, field, options}) => {
       )
     case 'select_single':
       return (
-          <Select
-            className="border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-            label={description}
-            {...field}
-          >
-            {options?.map((item, index) => {
-              if (item.edit_actionйцуйцуs)
-                return (
-                  <MenuItem key={item.text} value={index}>
-                    {item.edit_actions[0].text_to_insert}
-                  </MenuItem>
-                )
-              else
-                return (
-                  <MenuItem key={item.text} value={index}>
-                    {item.text}
-                  </MenuItem>
-                )
-            })}
-          </Select>
+        <Select
+          className="border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+          label={description}
+          {...field}
+        >
+          {options?.map((item, index) => {
+            if (item.edit_action)
+              return (
+                <MenuItem key={item.text} value={index}>
+                  {item.edit_actions[0].text_to_insert}
+                </MenuItem>
+              )
+            else
+              return (
+                <MenuItem key={item.text} value={index}>
+                  {item.text}
+                </MenuItem>
+              )
+          })}
+        </Select>
       )
     case 'select_multiple':
       return (

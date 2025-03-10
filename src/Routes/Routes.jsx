@@ -1,5 +1,5 @@
 import { useCookies } from 'react-cookie'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Constructor from '../components/Constructor/Constructor'
 import Home from '../components/Home/Home'
 import Login from '../components/Login/Login'
