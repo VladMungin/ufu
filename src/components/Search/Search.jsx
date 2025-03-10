@@ -66,11 +66,12 @@ const Search = () => {
                   <div className="flex flex-col gap-4 ">
                     <h3 className="font-bold leading-6">{document.name}</h3>
                     <span>
-                      {splitStringByNumber(document.description).map((item) => (
-                        <li className="list-none" key={item}>
-                          {item}
-                        </li>
-                      ))}
+                      {document.description &&
+                        splitStringByNumber(document.description)?.map((item) => (
+                          <li className="list-none" key={item}>
+                            {item}
+                          </li>
+                        ))}
                     </span>
                   </div>
                 </Link>

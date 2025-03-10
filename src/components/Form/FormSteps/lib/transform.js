@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 export const transformData = (dataFromAPI, dataFromForm) => {
   return [
     {
@@ -14,6 +16,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
               chosen_options: [
                 {
                   index: dataFromForm[field.description.replaceAll('.', '')],
+                  input: dataFromForm[`${field.description.replaceAll('.', '')}-other`] || '',
                 },
               ],
             }
@@ -32,6 +35,12 @@ export const transformData = (dataFromAPI, dataFromForm) => {
               groups: [
                 {
                   fields: field.fields.map((subfield) => {
+                    if (subfield.type === 'date') {
+                      return {
+                        type: subfield.type,
+                        input: dayjs(dataFromForm[subfield.description]).format('DD:MM:YYYY'),
+                      }
+                    }
                     return {
                       type: subfield.type,
                       input: dataFromForm[subfield.description],

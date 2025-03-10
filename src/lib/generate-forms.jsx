@@ -51,7 +51,6 @@ export const GenerateForms = ({ fields }) => {
         text: option.text,
         value: index,
       }))
-      console.log(field.description)
       return (
         <React.Fragment key={index}>
           <p>{field.description}</p>

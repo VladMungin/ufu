@@ -2,6 +2,7 @@ import { Radio, RadioGroup } from '@headlessui/react'
 import { Input, MenuItem, Select } from '@mui/material'
 import cn from 'classnames'
 import React from 'react'
+import { Controller, useFormContext } from 'react-hook-form'
 import { DatePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 
@@ -12,6 +13,7 @@ const style = {
 }
 
 const GenerateField = ({ type, description, field, options }) => {
+  const { control } = useFormContext()
   switch (type) {
     case 'term':
       return <p>{description}</p>
@@ -30,7 +32,7 @@ const GenerateField = ({ type, description, field, options }) => {
           {...field}
           type="email"
           placeholder={description}
-          className="border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+          className="border-[1px] border-[#CCC2DcontrolC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
         />
       )
     case 'password':
@@ -86,46 +88,62 @@ const GenerateField = ({ type, description, field, options }) => {
       )
     case 'select_multiple':
       return (
-        <RadioGroup value={field.value} onChange={field.onChange} className="w-fit">
-          {options.map((option) => {
-            return (
-              <Radio value={option.value} key={option.value}>
-                {({ checked, disabled }) => (
-                  <div
-                    className={cn('gap-small flex cursor-pointer items-center  transition-colors', {
-                      'text-main hover:text-main': !checked && !disabled,
-                      'text-main': checked && !disabled,
-                      '!cursor-not-allowed text-main': disabled,
-                    })}
-                  >
+        <div className="">
+          <RadioGroup value={field.value} onChange={field.onChange} className="w-fit">
+            {options.map((option) => {
+              return (
+                <Radio value={option.value} key={option.value}>
+                  {({ checked, disabled }) => (
                     <div
-                      className={cn(
-                        'flex size-5 items-center justify-center rounded-full border-[2px] border-[#5C5CFF]',
-                        {
-                          'border-[#5C5CFF] bg-white': checked,
-                        },
-                      )}
-                    >
-                      <div
-                        className={cn('size-2.5 rounded-full opacity-0 transition-opacity', {
-                          'bg-[#5C5CFF] opacity-100': checked,
-                        })}
-                      />
-                    </div>
-                    <h4
-                      className={cn('ml-2', {
-                        'text-black': !disabled,
-                        'text-background-primary': disabled,
+                      className={cn('gap-small flex cursor-pointer items-center  transition-colors', {
+                        'text-main hover:text-main': !checked && !disabled,
+                        'text-main': checked && !disabled,
+                        '!cursor-not-allowed text-main': disabled,
                       })}
                     >
-                      {option.text}
-                    </h4>
-                  </div>
-                )}
-              </Radio>
-            )
-          })}
-        </RadioGroup>
+                      <div
+                        className={cn(
+                          'flex size-5 items-center justify-center rounded-full border-[2px] border-[#5C5CFF]',
+                          {
+                            'border-[#5C5CFF] bg-white': checked,
+                          },
+                        )}
+                      >
+                        <div
+                          className={cn('size-2.5 rounded-full opacity-0 transition-opacity', {
+                            'bg-[#5C5CFF] opacity-100': checked,
+                          })}
+                        />
+                      </div>
+                      <h4
+                        className={cn('ml-2', {
+                          'text-black': !disabled,
+                          'text-background-primary': disabled,
+                        })}
+                      >
+                        {option.text}
+                      </h4>
+                    </div>
+                  )}
+                </Radio>
+              )
+            })}
+          </RadioGroup>
+          {field.value === options.length - 1 && (
+            <Controller
+              name={`${field.name}-other`}
+              control={control}
+              render={({ field }) => {
+                return (
+                  <Input
+                    {...field}
+                    className="border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+                  />
+                )
+              }}
+            />
+          )}
+        </div>
       )
 
     default:
