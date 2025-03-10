@@ -50,4 +50,5 @@
 
 .ant-input {
   border-bottom: none !important;
+  outline: none !important;
 }

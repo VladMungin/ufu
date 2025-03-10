@@ -1,12 +1,12 @@
-import { SearchOutlined } from '@ant-design/icons'
+import SearchIcon from '@mui/icons-material/Search'
+import { Input, InputAdornment } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
-import { Button, Input } from 'antd'
+import { Button } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { querySuggestDocuments } from '../../api/api'
 import { splitStringByNumber } from '../../helpers/splitStringByNumber'
 import './style.css'
-
 const Search = () => {
   const { control, watch, handleSubmit } = useForm()
   const isDisabled = !watch('doc-name')
@@ -32,12 +32,18 @@ const Search = () => {
                 <Input
                   {...field}
                   type="text"
-                  addonBefore={<SearchOutlined />}
+                  // addonBefore={<SearchOutlined />}
                   placeholder="Введите запрос"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  }
                   variant="borderless"
-                  className="ant-input-search-page"
+                  className="w-full px-3 py-3.5 border border-[#CCC2DC] rounded-xl focus:border-[#CCC2DC] focus:outline-none"
                 />
               )
+              
             }}
           />
           <Button
