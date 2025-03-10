@@ -76,7 +76,6 @@ const Form = () => {
   }, [status])
 
   const prev = async () => {
-    console.log(currentStep)
     if (currentStep === 1) {
       setStages((prevStages) => {
         const newStages = [...prevStages]
