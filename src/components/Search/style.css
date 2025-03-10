@@ -1,3 +1,52 @@
+/* .ant-input-outlined {
+  border: none;
+} */
+
+.ant-input-search-page {
+  border: none !important;
+}
+
+.ant-input-search-page:active {
+  border: none !important;
+  outline: none !important;
+}
+
+:where(.css-dev-only-do-not-override-7ny38l).ant-btn-variant-outlined:disabled,
+:where(.css-dev-only-do-not-override-7ny38l).ant-btn-variant-dashed:disabled,
+:where(.css-dev-only-do-not-override-7ny38l).ant-btn-variant-outlined.ant-btn-disabled,
+:where(.css-dev-only-do-not-override-7ny38l).ant-btn-variant-dashed.ant-btn-disabled {
+  background-color: #fff !important;
+  border-color: #c4c4ff !important;
+  color: #ccc2dc !important;
+}
+
+:where(.css-dev-only-do-not-override-7ny38l).ant-input-group > .ant-input:last-child,
+:where(.css-dev-only-do-not-override-7ny38l).ant-input-group .ant-input-group-addon:last-child {
+  border: none !important;
+  outline: none !important;
+}
+
+.search-button,
+[role='button'] {
+  background-color: #5c5cff !important;
+  box-shadow: 0px 0px 16px 0px #95a1ff33 !important;
+  color: #fff !important;
+  border-radius: 16px !important;
+  height: 52px;
+  width: 88px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+}
+
+.ant-input-group-wrapper {
+  border: 1px solid #ccc2dc !important;
+  border-radius: 12px !important;
+  background: #fff;
+  padding: 12px 14px;
+  box-shadow: 0px 0px 16px 0px #95a1ff33;
+}
 .css-t6zb6l::after{
   border:none !important;
 }
