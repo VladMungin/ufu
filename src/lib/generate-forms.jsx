@@ -46,6 +46,7 @@ export const GenerateForms = (fields) => {
           <Controller
             name={field.description}
             // defaultValue={0}
+            defaultValue=""
             control={control}
             render={({ field: inputField }) => generateField(field.type, field.description, inputField, options)}
           />
