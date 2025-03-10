@@ -56,7 +56,7 @@ export const GenerateForms = ({ fields }) => {
         <React.Fragment key={index}>
           <p>{field.description}</p>
           <Controller
-            name={field.description}
+            name={field.description.replaceAll('.', '')}
             control={control}
             render={({ field: inputField }) => (
               <GenerateField type={field.type} description={field.description} field={inputField} options={options} />
