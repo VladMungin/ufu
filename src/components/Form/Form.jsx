@@ -75,7 +75,42 @@ const Form = () => {
     if (isSuccess) setCurrentName(documentData.name)
   }, [status])
 
-  const prev = () => setCurrentStep(currentStep - 1)
+  const prev = async () => {
+    console.log(currentStep)
+    if (currentStep === 1) {
+      setStages((prevStages) => {
+        const newStages = [...prevStages]
+        newStages.pop() // Удаляем последний элемент массива
+        return newStages
+      })
+      setCurrentStep((prevStep) => prevStep - 1)
+
+      return
+    }
+    if (currentStep > 0) {
+      // Удаляем последний элемент массива stages
+      setStages((prevStages) => {
+        const newStages = [...prevStages]
+        newStages.pop() // Удаляем последний элемент массива
+        return newStages
+      })
+
+      // Обновляем данные на сервере с новым массивом stages
+      await mutateAsync({
+        id: document_id,
+        stages: stages.slice(0, -1), // Отправляем stages без последнего элемента
+      })
+
+      // Обновляем превью документа
+      await getDocumentPreview({
+        id: document_id,
+        stages: stages.slice(0, -1), // Отправляем stages без последнего элемента
+      })
+
+      // Уменьшаем текущий шаг
+      setCurrentStep((prevStep) => prevStep - 1)
+    }
+  }
 
   const renderStep = (step) => {
     switch (step) {
