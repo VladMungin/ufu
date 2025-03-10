@@ -1,6 +1,7 @@
 import { Radio, RadioGroup } from '@headlessui/react'
 import { FormControl, Input, MenuItem, Select } from '@mui/material'
 import cn from 'classnames'
+import React from 'react'
 import { DatePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 
@@ -10,7 +11,7 @@ const style = {
   gap: 8,
 }
 
-const generateField = (type, description, field, options) => {
+const GenerateField = ({type, description, field, options}) => {
   switch (type) {
     case 'term':
       return <p>{description}</p>
@@ -62,7 +63,6 @@ const generateField = (type, description, field, options) => {
       )
     case 'select_single':
       return (
-        <FormControl fullWidth>
           <Select
             className="border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
             label={description}
@@ -83,14 +83,13 @@ const generateField = (type, description, field, options) => {
                 )
             })}
           </Select>
-        </FormControl>
       )
     case 'select_multiple':
       return (
-        <RadioGroup {...field} className="w-fit">
+        <RadioGroup value={field.value} onChange={field.onChange} className="w-fit">
           {options.map((option) => {
             return (
-              <Radio value={option.value}>
+              <Radio value={option.value} key={option.value}>
                 {({ checked, disabled }) => (
                   <div
                     className={cn('gap-small flex cursor-pointer items-center  transition-colors', {
@@ -141,4 +140,4 @@ const generateField = (type, description, field, options) => {
   }
 }
 
-export default generateField
+export default GenerateField
