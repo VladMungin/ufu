@@ -1,8 +1,9 @@
 import React from 'react'
-import { Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import generateField from './generate-field'
 
-const generateForms = (fields, control) => {
+export const GenerateForms = (fields) => {
+  const { control } = useFormContext()
   const form = fields.map((field, index) => {
     if (field.type === 'fields_group')
       return (
@@ -66,5 +67,3 @@ const generateForms = (fields, control) => {
 
   return form
 }
-
-export default generateForms

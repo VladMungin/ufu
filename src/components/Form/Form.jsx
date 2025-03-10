@@ -3,7 +3,7 @@ import { Button, Steps } from 'antd'
 import { useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { queryDocumentPreview, querySurvey, querySurveyNext } from '../../api/api'
 import { pdfAtom } from '../../store/store'
@@ -48,13 +48,15 @@ const Form = () => {
 
   const { Step } = Steps
   const [currentStep, setCurrentStep] = useState(0)
-  const { control, getValues } = useForm()
+  const method = useForm()
 
   const [stages, setStages] = useState([])
 
   const next = async () => {
     const dataToQuery =
-      currentStep === 0 ? transformData(documentData, getValues()) : transformData(nextStageData, getValues())
+      currentStep === 0
+        ? transformData(documentData, method.getValues())
+        : transformData(nextStageData, method.getValues())
 
     await mutateAsync({
       id: document_id,
@@ -114,9 +116,9 @@ const Form = () => {
   const renderStep = (step) => {
     switch (step) {
       case 0:
-        return <StepFrom control={control} data={documentData} />
+        return <StepFrom data={documentData} />
       default:
-        return <StepFrom control={control} data={nextStageData} />
+        return <StepFrom data={nextStageData} />
     }
   }
 
@@ -126,7 +128,7 @@ const Form = () => {
 
   return (
     <div className="lg:w-[880px] rounded-[36px] border-[1px] border-[#C4C4FF] shadow-[0px_0px_16px_0px_#95A1FF33] mx-4">
-      <form className="flex flex-col h-full justify-between">
+      <FormProvider {...method} className="flex flex-col h-full justify-between">
         <div className="">
           <Steps current={currentStep} className="mt-7 px-11 lg:px-[78px]">
             {stepsArray.map((step) => (
@@ -152,7 +154,7 @@ const Form = () => {
             Вперед
           </Button>
         </div>
-      </form>
+      </FormProvider>
     </div>
   )
 }
