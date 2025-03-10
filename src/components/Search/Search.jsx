@@ -23,7 +23,7 @@ const Search = () => {
     <div className="max-w-[1920px] mx-auto px-[68px]">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col max-w-[1112px] mt-[138px]">
         <h1 className="text-[#5C5CFF] text-[48px] font-bold">Конструктор документов</h1>
-        <div className="flex gap-x-4 mt-5 pt-5">
+        <div className="flex gap-x-4 mt-5 pt-5 items-center">
           <Controller
             name="doc-name"
             control={control}

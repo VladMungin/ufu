@@ -14,7 +14,7 @@ const Home = () => {
         </p>
         <Link
           to="/search"
-          className="block bg-[#5C5CFF] py-4  text-[#FFF] tracking-[0.1px] font-semibold text-base rounded-2xl shadow-[0px_0px_16px_0px_#95A1FF33] px-6 w-max"
+          className="block bg-[#5C5CFF] py-4  text-[#FFF] tracking-[0.1px] font-semibold text-base rounded-2xl shadow-[0px_0px_16px_0px_#95A1FF33] px-6 w-max hover:no-underline hover:text-white hover:scale-105 transition-all duration-300"
         >
           Начать
         </Link>

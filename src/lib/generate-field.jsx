@@ -137,7 +137,7 @@ const GenerateField = ({ type, description, field, options }) => {
                 return (
                   <Input
                     {...field}
-                    className="border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+                    className="mt-6 border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4 w-full"
                   />
                 )
               }}
