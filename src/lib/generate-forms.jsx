@@ -1,8 +1,8 @@
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import generateField from './generate-field'
+import { default as GenerateField } from './generate-field'
 
-export const GenerateForms = (fields) => {
+export const GenerateForms = ({ fields }) => {
   const { control } = useFormContext()
   const form = fields.map((field, index) => {
     if (field.type === 'fields_group')
@@ -15,9 +15,14 @@ export const GenerateForms = (fields) => {
                 key={index}
                 name={field?.description}
                 control={control}
-                render={({ field: inputField }) =>
-                  generateField(field.type, field.description, inputField, field?.options)
-                }
+                render={({ field: inputField }) => (
+                  <GenerateField
+                    type={field.type}
+                    description={field.description}
+                    field={inputField}
+                    options={field?.options}
+                  />
+                )}
               />
             )
           })}
@@ -30,7 +35,14 @@ export const GenerateForms = (fields) => {
           <Controller
             name={field.description}
             control={control}
-            render={({ field: inputField }) => generateField(field.type, field.description, inputField, field?.options)}
+            render={({ field: inputField }) => (
+              <GenerateField
+                type={field.type}
+                description={field.description}
+                field={inputField}
+                options={field?.options}
+              />
+            )}
           />
         </React.Fragment>
       )
@@ -45,10 +57,10 @@ export const GenerateForms = (fields) => {
           <p>{field.description}</p>
           <Controller
             name={field.description}
-            // defaultValue={0}
-            defaultValue=""
             control={control}
-            render={({ field: inputField }) => generateField(field.type, field.description, inputField, options)}
+            render={({ field: inputField }) => (
+              <GenerateField type={field.type} description={field.description} field={inputField} options={options} />
+            )}
           />
         </React.Fragment>
       )
@@ -59,7 +71,14 @@ export const GenerateForms = (fields) => {
           <Controller
             name={field.description}
             control={control}
-            render={({ field: inputField }) => generateField(field.type, field.description, inputField)}
+            render={({ field: inputField }) => (
+              <GenerateField
+                type={field.type}
+                description={field.description}
+                field={inputField}
+                options={field?.options}
+              />
+            )}
           />
         </React.Fragment>
       )
