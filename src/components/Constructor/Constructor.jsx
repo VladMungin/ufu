@@ -3,7 +3,6 @@ import { pdfAtom } from '../../store/store'
 import Form from '../Form/Form.jsx'
 const Constructor = () => {
   const [pdf] = useAtom(pdfAtom)
-  console.log(pdf)
 
   return (
     <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh] lg:flex-row flex-col">

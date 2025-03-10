@@ -7,7 +7,6 @@ import AppRoutes from '../../Routes/Routes'
 import BG from '../BG/BG'
 import Header from '../Header/Header'
 import './App.css'
-
 function App() {
   const queryClient = new QueryClient()
 

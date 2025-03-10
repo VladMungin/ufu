@@ -70,7 +70,6 @@ const Form = () => {
   }
 
   const [currentName, setCurrentName] = useState()
-  // console.log(documentPreview)
 
   useEffect(() => {
     if (isSuccess) setCurrentName(documentData.name)

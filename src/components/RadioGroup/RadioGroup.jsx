@@ -6,16 +6,18 @@ export const RadioGroup = ({ value, options, className, optionClassName, onChang
   return (
     <HeadlessRadioGroup className={cn('w-fit', className)} value={value} onChange={onChange}>
       {options?.map((option) => (
-        <Field key={`${option.text}`}>
+        <Field key={`${option.value}`}>
           <Radio
-            value={option.text}
+            value={option.value}
             disabled={option.disabled}
             onClick={(event) => {
               event.stopPropagation()
+              onChange(option.value)
+              console.log(option.value)
             }}
             onTouchStart={(event) => {
               event.stopPropagation()
-              onChange(option.text)
+              onChange(option.value)
             }}
           >
             {({ checked, disabled }) => (

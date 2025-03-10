@@ -34,16 +34,19 @@ const generateForms = (fields, control) => {
         </React.Fragment>
       )
     } else if (field.type === 'select_multiple') {
-      console.log(control)
-
+      const options = field.options.map((option, index) => ({
+        text: option.text,
+        value: index,
+      }))
+      console.log(field.description)
       return (
         <React.Fragment key={index}>
           <p>{field.description}</p>
           <Controller
             name={field.description}
+            // defaultValue={0}
             control={control}
-            defaultValue={field?.options[0].text}
-            render={({ field: inputField }) => generateField(field.type, field.description, inputField, field?.options)}
+            render={({ field: inputField }) => generateField(field.type, field.description, inputField, options)}
           />
         </React.Fragment>
       )

@@ -9,8 +9,6 @@ export const transformData = (dataFromAPI, dataFromForm) => {
           }
           if (field.type === 'select_multiple') {
             console.log(dataFromForm)
-            console.log(field)
-            console.log(dataFromForm[field.description])
             return {
               type: field.type,
               chosen_options: [

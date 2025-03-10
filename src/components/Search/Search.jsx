@@ -18,7 +18,6 @@ const Search = () => {
   const onSubmit = (data) => {
     const res = mutateAsync(data['doc-name'])
   }
-  console.log(searchedDocument)
   return (
     <div className="max-w-[1920px] mx-auto px-[68px]">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col max-w-[1112px] mt-[138px]">
