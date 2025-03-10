@@ -4,6 +4,7 @@ import { Button, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { querySuggestDocuments } from '../../api/api'
+import { splitStringByNumber } from '../../helpers/splitStringByNumber'
 import './style.css'
 
 const Search = () => {
@@ -53,7 +54,7 @@ const Search = () => {
       {searchedDocument && (
         <div className="flex flex-col mt-9">
           <div className="text-[#5C5CFF] text-xl">Скорей всего, вам подойдет этот тип документа:</div>
-          <div className="flex flex-col gap-3 mt-3">
+          <div className="grid grid-cols-3 gap-3 mt-3">
             {searchedDocument &&
               searchedDocument.map((document) => (
                 <Link
@@ -61,8 +62,17 @@ const Search = () => {
                   to={`/constructor?document_id=${document.id}`}
                   className="flex gap-1.5 bg-white rounded-2xl shadow-[0px_0px_16px_0px_#95A1FF33] pl-3 pt-4 pb-4"
                 >
-                  <img src="/note_alt.svg" />
-                  {document.name}
+                  {/* <img src="/note_alt.svg" /> */}
+                  <div className="flex flex-col gap-4 ">
+                    <h3 className="font-bold leading-6">{document.name}</h3>
+                    <span>
+                      {splitStringByNumber(document.description).map((item) => (
+                        <li className="list-none" key={item}>
+                          {item}
+                        </li>
+                      ))}
+                    </span>
+                  </div>
                 </Link>
               ))}
           </div>
