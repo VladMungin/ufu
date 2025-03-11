@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 
 export const transformData = (dataFromAPI, dataFromForm) => {
+  console.log(dataFromAPI)
   return [
     {
       name: dataFromAPI.name,
@@ -10,7 +11,6 @@ export const transformData = (dataFromAPI, dataFromForm) => {
             return undefined // Пропускаем поле типа 'term'
           }
           if (field.type === 'select_multiple') {
-            console.log(dataFromForm)
             return {
               type: field.type,
               chosen_options: [
@@ -27,6 +27,12 @@ export const transformData = (dataFromAPI, dataFromForm) => {
               chosen_option: {
                 index: dataFromForm[field.description],
               },
+            }
+          }
+          if (field.type === 'date') {
+            return {
+              type: field.type,
+              input: dayjs(dataFromForm[field.description]).format('DD.MM.YYYY'),
             }
           }
           if (field.type === 'fields_group') {
