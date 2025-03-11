@@ -1,12 +1,7 @@
-import { useCookies } from 'react-cookie'
-import { useFormContext } from 'react-hook-form'
 import { GenerateForms } from '../../../lib/generate-forms'
 import './Style/FirstStep.css'
 
 const StepFrom = ({ data }) => {
-  const { control } = useFormContext()
-  const [tokens] = useCookies(['access_token'])
-
   if (!data) return <>Загрузка</>
 
   return (
