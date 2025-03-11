@@ -6,13 +6,15 @@ import { useCookies } from 'react-cookie'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { queryDocumentPreview, querySurvey, querySurveyNext } from '../../api/api'
-import { pdfAtom } from '../../store/store'
+import { loadingPreviewAtom, pdfAtom } from '../../store/store'
 import StepFrom from './FormSteps/FirstStep'
 import { transformData } from './FormSteps/lib/transform'
 
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
   const setPdf = useSetAtom(pdfAtom)
+  const setLoadingPreviewAtom = useSetAtom(loadingPreviewAtom)
+
   const [params] = useSearchParams()
 
   const document_id = params.get('document_id')
@@ -38,11 +40,12 @@ const Form = () => {
     mutationFn: ({ id, stages }) => querySurveyNext(id, stages),
   })
 
-  const { mutateAsync: getDocumentPreview, data } = useMutation({
+  const { mutateAsync: getDocumentPreview, isPending } = useMutation({
     mutationKey: ['document-preview', document_id],
     mutationFn: ({ id, stages }) => queryDocumentPreview(id, stages),
     onSuccess: (data) => {
       setPdf(data.filename)
+      setLoadingPreviewAtom(false)
     },
   })
 
@@ -53,6 +56,7 @@ const Form = () => {
   const [stages, setStages] = useState([])
 
   const next = async () => {
+    setLoadingPreviewAtom(true)
     const dataToQuery =
       currentStep === 0
         ? transformData(documentData, method.getValues())
@@ -78,6 +82,8 @@ const Form = () => {
   }, [status])
 
   const prev = async () => {
+    setLoadingPreviewAtom(true)
+
     if (currentStep === 1) {
       setStages((prevStages) => {
         const newStages = [...prevStages]
@@ -85,7 +91,8 @@ const Form = () => {
         return newStages
       })
       setCurrentStep((prevStep) => prevStep - 1)
-
+      setPdf('')
+      setLoadingPreviewAtom(false)
       return
     }
     if (currentStep > 0) {
