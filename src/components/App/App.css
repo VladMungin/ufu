@@ -61,3 +61,19 @@ body {
 .rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus {
   @apply outline-none;
 }
+
+/* .ant-steps-item-icon {
+  @apply !bg-[#5C5CFF];
+} */
+
+:where(.css-dev-only-do-not-override-7ny38l).ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  @apply !bg-[#5C5CFF];
+}
+
+:where(.css-dev-only-do-not-override-7ny38l).ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+  @apply !bg-[#C4C4FF];
+}
+
+:where(.css-dev-only-do-not-override-7ny38l).ant-steps .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+  @apply !text-[#000];
+}
