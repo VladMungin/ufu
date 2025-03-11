@@ -6,6 +6,7 @@ const Constructor = () => {
   const [pdf] = useAtom(pdfAtom)
   const [isLoadingPreview] = useAtom(loadingPreviewAtom)
   console.log(pdf)
+
   return (
     <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh] lg:flex-row flex-col ">
       <Form />
@@ -30,3 +31,11 @@ const Constructor = () => {
 }
 
 export default Constructor
+{
+  /* <PDFViewer>
+  <MyDocument />
+</PDFViewer> */
+}
+{
+  // <iframe src={`${import.meta.env.VITE_DATA_API}/${pdf}`} width="100%" height="100%" />
+}

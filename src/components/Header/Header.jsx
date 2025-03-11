@@ -9,7 +9,7 @@ const Header = () => {
           <Link to="/" className="hover:no-underline hover:text-black">
             <div className="max-w-[1920px] mx-auto flex w-full justify-center ">
               <img src="/logo.svg" alt="" />
-              <h1 className="block ml-2 font-bold text-xl tracking-[0.15px]">Конструктор документов</h1>
+              <h1 className="block ml-2 font-bold text-xl tracking-[0.15px]">ЮрТехник</h1>
             </div>
           </Link>
         )}
@@ -17,7 +17,7 @@ const Header = () => {
           <div className="px-16 flex w-full justify-between items-center ">
             <Link to="/" className="hover:no-underline hover:text-black flex">
               <img src="/logo.svg" alt="" />
-              <h1 className="block ml-2 font-bold text-xl tracking-[0.15px]">Конструктор документов</h1>
+              <h1 className="block ml-2 font-bold text-xl tracking-[0.15px]">ЮрТехник</h1>
             </Link>
             <div className="flex gap-2">
               <Link

@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="flex justify-between">
           <span className="flex text-[#c4c4FF] font-normal text-xs tracking-[0.4px]">
-            Ваша компания © Все права защищены. 2024
+            ЮрТехник © Все права защищены. 2024
           </span>
           <span className="flex text-[#c4c4FF] font-normal text-xs tracking-[0.4px]">Политика конфиденциальности</span>
         </div>
