@@ -1,6 +1,6 @@
 const BG = () => {
   return (
-    <div className="absolute -z-10 max-w-[1920px] left-0 right-0 top-0 bottom-0">
+    <div className="absolute -z-10 max-w-[1920px] left-0 right-0 top-0 bottom-0 opacity-40">
       <svg
         className="max-w-[1920px] w-full min-h-[100dvh]"
         viewBox="0 0 1920 846"
