@@ -7,9 +7,9 @@ const Constructor = () => {
   const [isLoadingPreview] = useAtom(loadingPreviewAtom)
   console.log(pdf)
   return (
-    <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh] lg:flex-row flex-col">
+    <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh] lg:flex-row flex-col ">
       <Form />
-      <div className="max-w-[880px] w-[100%]">
+      <div className="w-1/2">
         <div className="relative h-full">
           {isLoadingPreview ? (
             <div className="flex items-center justify-center h-full">

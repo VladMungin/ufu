@@ -17,11 +17,11 @@ const Search = () => {
   })
 
   const onSubmit = (data) => {
-    const res = mutateAsync(data['doc-name'])
+    mutateAsync(data['doc-name'])
   }
   return (
     <div className="max-w-[1920px] mx-auto px-[68px]">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col max-w-[1112px] mt-[138px]">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col max-w-[1112px] ">
         <h1 className="text-[#5C5CFF] text-[48px] font-bold">Конструктор документов</h1>
         <div className="flex gap-x-4 mt-5 pt-5 items-center">
           <Controller
@@ -43,7 +43,6 @@ const Search = () => {
                   className="w-full px-3 py-3.5 border border-[#CCC2DC] rounded-xl focus:border-[#CCC2DC] focus:outline-none"
                 />
               )
-              
             }}
           />
           <Button

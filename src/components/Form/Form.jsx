@@ -134,7 +134,7 @@ const Form = () => {
   const stepsArray = Array.from({ length: currentStep + 1 }, (_, index) => index)
 
   return (
-    <div className="lg:w-[880px] rounded-[36px] border-[1px] border-[#C4C4FF] shadow-[0px_0px_16px_0px_#95A1FF33] mx-4">
+    <div className="lg:w-1/2 rounded-[36px] border-[1px] border-[#C4C4FF] shadow-[0px_0px_16px_0px_#95A1FF33] mx-4">
       <FormProvider {...method} className="flex flex-col h-full justify-between">
         <div className="">
           <Steps current={currentStep} className="mt-7 px-11 lg:px-[78px]">
@@ -149,14 +149,14 @@ const Form = () => {
             onClick={prev}
             disabled={currentStep === 0}
             type="default"
-            className="max-w-[404px] h-[52px] py-3.5 px-11 lg:px-[169px] font-semibold text-base border-[1px] border-[#C4C4FF] rounded-2xl"
+            className="max-w-[404px] h-[52px] py-3.5 w-1/2 font-semibold text-base border-[1px] border-[#C4C4FF] rounded-2xl"
           >
             Назад
           </Button>
           <Button
             onClick={next}
             type="primary"
-            className="max-w-[404px] h-[52px] py-3.5 px-11 lg:px-[169px] text-base font-semibold bg-[#5C5CFF] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-2xl"
+            className="max-w-[404px] h-[52px] py-3.5 w-1/2 text-base font-semibold bg-[#5C5CFF] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-2xl"
           >
             Вперед
           </Button>
