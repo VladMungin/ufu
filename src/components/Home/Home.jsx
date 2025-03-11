@@ -7,10 +7,10 @@ const Home = () => {
         className="max-w-max mx-16 h-max bg-white shadow-[0px_0px_16px_0px_#95A1FF33] p-[28px] rounded-[36px]
 "
       >
-        <h1 className="text-[#5C5CFF] text-[48px] ">ЮрТехник</h1>
+        <h1 className="text-[#5C5CFF] text-[48px] font-bold">ЮрТехник</h1>
         <p className=" text-[24px] leading-[32px] mt-[20px] mb-4">
-          Конструктор документов на основе <span className="font-bold">ИИ</span>.<br /> Автоматическое формирование
-          документов в соответствии с требованиями закона
+          Конструктор документов на основе ИИ.
+          <br /> Автоматическое формирование документов в соответствии с требованиями закона
         </p>
         <Link
           to="/search"
