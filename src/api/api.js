@@ -25,13 +25,13 @@ export const queryRefetchAccessToken = async (refreshToken) => {
 }
 
 export const querySurvey = async (token, id) => {
-  const res = await axios.get(`${import.meta.env.VITE_DATA_API}:433/surveys/${id}`)
+  const res = await axios.get(`${import.meta.env.VITE_DATA_API}/surveys/${id}`)
 
   return res.data
 }
 
 export const querySurveyNext = async (id, stages) => {
-  const res = await axios.post(`${import.meta.env.VITE_DATA_API}:433/surveys/${id}/next_stage`, {
+  const res = await axios.post(`${import.meta.env.VITE_DATA_API}/surveys/${id}/next_stage`, {
     stages,
   })
 
@@ -40,7 +40,7 @@ export const querySurveyNext = async (id, stages) => {
 
 export const queryDocumentPreview = async (id, stages) => {
   const res = await axios.post(
-    `${import.meta.env.VITE_DATA_API}:433/surveys/${id}/document_preview`,
+    `${import.meta.env.VITE_DATA_API}/surveys/${id}/document_preview`,
     {
       stages,
     },
@@ -55,7 +55,7 @@ export const queryDocumentPreview = async (id, stages) => {
 }
 
 export const querySuggestDocuments = async (request) => {
-  const res = await axios.post(`${import.meta.env.VITE_DATA_API}:433/suggested_documents`, {
+  const res = await axios.post(`${import.meta.env.VITE_DATA_API}/suggested_documents`, {
     request,
   })
 

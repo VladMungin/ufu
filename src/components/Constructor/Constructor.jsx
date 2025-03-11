@@ -9,7 +9,7 @@ const Constructor = () => {
       <Form />
       <div className="max-w-[880px] w-[100%]">
         <div className="relative h-full">
-          <iframe src={`${import.meta.env.VITE_DATA_API}:433/${pdf}`} width="100%" height="100%" />
+          <iframe src={`${import.meta.env.VITE_DATA_API}/${pdf}`} width="100%" height="100%" />
         </div>
       </div>
     </div>
