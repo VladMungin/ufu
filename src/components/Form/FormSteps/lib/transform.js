@@ -53,7 +53,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
             }
             return {
               type: field.type,
-              input: `В ${dayjs(dataFromForm[field.description]).format('HH:MM')}`,
+              input: `${dayjs(dataFromForm[field.description]).format('HH:MM')}`,
             }
           }
           if (field.type === 'fields_group') {
