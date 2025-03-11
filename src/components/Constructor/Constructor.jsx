@@ -13,7 +13,7 @@ const Constructor = () => {
       <div className="w-1/2">
         <div className="relative h-full">
           {isLoadingPreview ? (
-            <div className="flex items-center justify-center h-full">
+            <div className="h-full flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl">
               <Loading className="fill-[#5C5CFF] animate-spin w-1/4" />
             </div>
           ) : pdf ? (

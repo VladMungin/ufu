@@ -80,7 +80,7 @@ export const GenerateForms = ({ fields }) => {
         <React.Fragment key={index}>
           <div className="flex flex-col gap-x-4">
             <p>{field.description}</p>
-            {(field.type === 'date' || field.type === 'time') && (
+            {(field.type === 'date' || field.type === 'time') && field.accept_interval && (
               <Controller
                 name={`${field.description}-isInterval`}
                 control={control}

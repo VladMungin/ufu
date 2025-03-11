@@ -35,3 +35,29 @@
 body {
   @apply font-montserrat;
 }
+
+.rs-calendar-time-dropdown-cell.rs-calendar-time-dropdown-cell-active {
+  @apply bg-[#5C5CFF];
+}
+
+.rs-calendar-time-dropdown-cell {
+  @apply hover:bg-[#C4C4FF] hover:text-[#000];
+}
+
+.rs-btn-primary {
+  @apply bg-[#5C5CFF] text-[#fff] hover:bg-[#C4C4FF];
+}
+
+.rs-input-group {
+  @apply border-none focus:border-none;
+}
+
+.rs-input:focus,
+.rs-input:hover:not(:disabled) {
+  @apply border-[0px] focus:border-none outline-none;
+}
+
+.rs-input:focus-within,
+.rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus {
+  @apply outline-none;
+}
