@@ -65,7 +65,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                     if (subfield.type === 'date') {
                       return {
                         type: subfield.type,
-                        input: dayjs(dataFromForm[subfield.description]).format('DD:MM:YYYY'),
+                        input: dayjs(dataFromForm[subfield.description]).format('DD.MM.YYYY'),
                       }
                     }
                     return {
