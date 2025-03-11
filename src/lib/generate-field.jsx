@@ -121,7 +121,6 @@ const GenerateField = ({ type, description, field, options }) => {
       return (
         <Select
           className="border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-          label={description}
           {...field}
         >
           {options?.map((item, index) => {
