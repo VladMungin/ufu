@@ -30,9 +30,30 @@ export const transformData = (dataFromAPI, dataFromForm) => {
             }
           }
           if (field.type === 'date') {
+            if (Array.isArray(dataFromForm[field.description])) {
+              return {
+                type: field.type,
+                input: [
+                  dayjs(dataFromForm[field.description][0]).format('DD.MM.YYYY'),
+                  dayjs(dataFromForm[field.description][1]).format('DD.MM.YYYY'),
+                ],
+              }
+            }
             return {
               type: field.type,
               input: dayjs(dataFromForm[field.description]).format('DD.MM.YYYY'),
+            }
+          }
+          if (field.type === 'time') {
+            if (Array.isArray(dataFromForm[field.description])) {
+              return {
+                type: field.type,
+                input: `В промежуток времени с ${dayjs(dataFromForm[field.description][0]).format('HH:MM')} по ${dayjs(dataFromForm[field.description][1]).format('HH:MM')}`,
+              }
+            }
+            return {
+              type: field.type,
+              input: `В ${dayjs(dataFromForm[field.description]).format('HH:MM')}`,
             }
           }
           if (field.type === 'fields_group') {

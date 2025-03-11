@@ -3,7 +3,7 @@ import { Input, MenuItem, Select } from '@mui/material'
 import cn from 'classnames'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { DatePicker, TimeRangePicker } from 'rsuite'
+import { DatePicker, DateRangePicker, TimePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 
 const style = {
@@ -13,7 +13,7 @@ const style = {
 }
 
 const GenerateField = ({ type, description, field, options }) => {
-  const { control } = useFormContext()
+  const { control, watch } = useFormContext()
   switch (type) {
     case 'term':
       return <p>{description}</p>
@@ -46,22 +46,74 @@ const GenerateField = ({ type, description, field, options }) => {
       )
     case 'time':
       return (
-        <TimeRangePicker
-          {...field}
-          placeholder={description}
-          format="HH:mm"
-          className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-        />
+        <>
+          {watch(`${field.name}-isInterval`) ? (
+            <TimeRangePicker
+              {...field}
+              placeholder={description}
+              format="HH:mm"
+              className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+            />
+          ) : (
+            <TimePicker
+              {...field}
+              placeholder={description}
+              format="HH:mm"
+              className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+            />
+          )}
+        </>
       )
     case 'date':
       return (
-        <DatePicker
-          {...field}
-          showOneCalendar
-          placeholder={description}
-          ranges={[]}
-          className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-        />
+        <>
+          {watch(`${field.name}-isInterval`) ? (
+            <DateRangePicker
+              {...field}
+              placeholder={description}
+              ranges={[]}
+              className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+              locale={{
+                sunday: 'Su',
+                monday: 'Mo',
+                tuesday: 'Tu',
+                wednesday: 'We',
+                thursday: 'Th',
+                friday: 'Fr',
+                saturday: 'Sa',
+                ok: 'OK',
+                today: 'Today',
+                yesterday: 'Yesterday',
+                hours: 'Hours',
+                minutes: 'Minutes',
+                seconds: 'Seconds',
+              }}
+            />
+          ) : (
+            <DatePicker
+              {...field}
+              placeholder={description}
+              ranges={[]}
+              className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+              locale={{
+                sunday: 'ВС',
+                monday: 'ПН',
+                tuesday: 'ВТ',
+                wednesday: 'СР',
+                thursday: 'ЧТ',
+                friday: 'ПТ',
+                saturday: 'СБ',
+                ok: 'OK',
+                today: 'Сегодня',
+                yesterday: 'Завтра',
+                hours: 'Часы',
+                minutes: 'Минуты',
+                seconds: 'Секунды',
+                mar: 'Март',
+              }}
+            />
+          )}
+        </>
       )
     case 'select_single':
       return (

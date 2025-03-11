@@ -1,0 +1,33 @@
+.checkbox-indeterminate ~ label {
+  @apply before:p-1 after:-left-[21px] after:h-2.5 after:w-2.5 after:rounded-[1px] after:bg-white after:bg-none after:opacity-100;
+}
+.checkbox-indeterminate ~ label::after {
+  mask-image: none;
+}
+
+.custom-checkbox:checked ~ label {
+  @apply before:border-[#5C5CFF] before:bg-[#5C5CFF] after:opacity-100;
+}
+.custom-checkbox:disabled ~ label {
+  @apply cursor-not-allowed before:border-[#5C5CFF] before:bg-white;
+}
+.custom-checkbox:checked:disabled ~ label {
+  @apply cursor-not-allowed before:bg-white;
+}
+.custom-checkbox:focus-visible ~ label {
+  @apply before:border-[#5C5CFF];
+}
+
+.custom-checkbox ~ label {
+  @apply before:absolute before:-left-[15px] before:top-1/2 before:h-[22px] before:w-[22px] before:-translate-x-full before:-translate-y-1/2 before:rounded-[5px] before:border-[2px] before:border-[#5C5CFF] before:transition-colors before:content-[""];
+}
+/* ::after */
+.custom-checkbox ~ label {
+  @apply transition-colors after:absolute after:-left-[20.5px] after:top-1/2 after:h-2 after:w-[11px] after:-translate-x-full after:-translate-y-1/2 after:bg-white after:bg-no-repeat after:opacity-0 after:transition-opacity after:content-[""];
+}
+.custom-checkbox ~ label::after {
+  mask-image: url(../../assets/complete.svg);
+  mask-size: cover;
+  -webkit-mask-image: url(../../assets/complete.svg);
+  -webkit-mask-size: cover;
+}
