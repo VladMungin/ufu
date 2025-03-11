@@ -6,6 +6,7 @@ import { CustomProvider } from 'rsuite'
 import { ruRU } from 'rsuite/esm/locales'
 import AppRoutes from '../../Routes/Routes'
 import BG from '../BG/BG'
+import { Footer } from '../Footer/Footer'
 import Header from '../Header/Header'
 import './App.css'
 function App() {
@@ -17,10 +18,13 @@ function App() {
         <CookiesProvider defaultSetOptions={{ path: '/' }}>
           <Provider>
             <QueryClientProvider client={queryClient}>
-              <div className="relative mx-auto max-w-[1920px]">
+              <BG />
+              <div className="flex flex-col min-h-screen justify-between items-start ">
                 <Header />
-                <BG />
-                <AppRoutes />
+                <div className="relative mx-auto container ">
+                  <AppRoutes />
+                </div>
+                <Footer />
               </div>
             </QueryClientProvider>
           </Provider>
