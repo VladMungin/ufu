@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div className="flex max-w-[1200px]   ">
       <div
-        className="max-w-max mx-4 h-max bg-white shadow-[0px_0px_16px_0px_#95A1FF33] p-[28px] rounded-[36px]
+        className="max-w-max mx-16 h-max bg-white shadow-[0px_0px_16px_0px_#95A1FF33] p-[28px] rounded-[36px]
 "
       >
         <h1 className="text-[#5C5CFF] text-[48px] ">Конструктор документов</h1>
