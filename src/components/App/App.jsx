@@ -27,7 +27,6 @@ function App() {
                   <AppRoutes />
                 </div>
                 <Footer />
-                <AppRoutes />
               </div>
             </QueryClientProvider>
           </Provider>
