@@ -28,16 +28,25 @@ const Constructor = () => {
         const canvas = document.createElement('canvas')
         const context = canvas.getContext('2d')
         pdfDocument.getPage(pageNum).then((page) => {
-          const viewport = page.getViewport({ scale: 1 })
+          const viewport = page.getViewport({ scale: 1.3 })
           canvas.height = viewport.height
           canvas.width = viewport.width
-
+          canvas.style.marginLeft = 'auto'
+          canvas.style.marginRight = 'auto'
           const renderContext = {
             canvasContext: context,
             viewport: viewport,
           }
           page.render(renderContext).promise.then(() => {
             canvasRef.current.appendChild(canvas)
+            if (pageNum < numPages) {
+              const separator = document.createElement('div')
+              separator.style.height = '10px' // высота полосы
+              separator.style.backgroundColor = '#000' // цвет полосы
+              separator.style.width = '100%' // ширина полосы
+              separator.style.margin = '0' // убрать отступы
+              canvasRef.current.appendChild(separator)
+            }
           })
         })
       }
@@ -54,11 +63,13 @@ const Constructor = () => {
               <Loading className="fill-[#5C5CFF] animate-spin w-1/4" />
             </div>
           ) : pdf ? (
-            <div
-              ref={canvasRef}
-              style={{ height: '800px', overflow: 'auto', display: 'flex', flexDirection: 'column' }}
-              className="pdf-canvas-container"
-            />
+            <div className=" shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto h-[800px] py-5 ">
+              <div
+                ref={canvasRef}
+                style={{ height: '100%', display: 'block' }}
+                className="pdf-canvas-container overflow-x-hidden mx-auto mr-1"
+              />
+            </div>
           ) : (
             <div className="h-full flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl">
               <img src="/logo.svg" alt="" className="w-1/2" />
