@@ -106,3 +106,88 @@ body {
   background-color: #f1f1f1; /* Цвет трека */
   border-radius: 4px; /* Закругление углов */
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes move2 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.svg-animated {
+  animation: move 4s ease-in-out infinite;
+}
+
+.svg-animated2 {
+  animation: move2 4s ease-in-out infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    stroke: 0% 50%;
+  }
+  50% {
+    stroke: 100% 50%;
+  }
+  100% {
+    stroke: 0% 50%;
+  }
+}
+
+.animated-gradient > path {
+  background: linear-gradient(270deg, #b1b1ff, #5c5cff);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+.fill-animation {
+  fill: transparent;
+  stroke: #b1b1ff; /* Цвет линии по умолчанию */
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+  animation: draw 2s infinite;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 0;
+    stroke: #b1b1ff; /* Начинаем с белого цвета */
+  }
+  25% {
+    stroke: #b1b1ff; /* Белый цвет сохраняется на середине */
+    stroke-dashoffset: 500; /* Половина от общей длины */
+  }
+  50% {
+    stroke-dashoffset: 3000;
+    stroke: white; /* В конце меняем на акцентный цвет */
+  }
+}
