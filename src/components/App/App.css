@@ -171,7 +171,7 @@ body {
 
 .fill-animation {
   stroke: #5c5cff; /* Начальный цвет */
-  animation: strokeAnimation infinite linear; /* Анимация */
+  animation: strokeAnimation infinite linear reverse; /* Анимация */
   animation-duration: 4s;
 }
 
