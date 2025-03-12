@@ -54,7 +54,7 @@ const GenerateField = ({ type, description, field, options }) => {
               format="HH:mm"
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
             />
-          ) : (
+        ) : (
             <TimePicker
               {...field}
               placeholder={description}
