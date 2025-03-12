@@ -170,13 +170,13 @@ body {
 }
 
 .fill-animation {
-  stroke: #fff; /* Начальный цвет */
+  stroke: #5c5cff; /* Начальный цвет */
   animation: strokeAnimation 2s infinite; /* Анимация */
 }
 
 @keyframes strokeAnimation {
   0% {
-    stroke: #fff; /* Начальный цвет */
+    stroke: #5c5cff; /* Начальный цвет */
   }
   100% {
     stroke: #b1b1ff; /* Конечный цвет */
@@ -308,7 +308,7 @@ body {
 
 .fill-animation2 {
   fill: transparent;
-  stroke: #5c5cff; /* Цвет линии по умолчанию */
+  stroke: #b1b1ff; /* Цвет линии по умолчанию */
   stroke-dasharray: 2700;
   stroke-dashoffset: 2700;
   animation: draw2 5s cubic-bezier(0.8, 0.8, 0.8, 0.8) infinite;
@@ -317,7 +317,7 @@ body {
 @keyframes draw2 {
   0% {
     stroke-dashoffset: 5400;
-    stroke: #5c5cff;
+    stroke: #b1b1ff;
   }
   100% {
     stroke-dashoffset: 0;
