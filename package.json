@@ -13,14 +13,12 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@headlessui/react": "^2.2.0",
+    "@mikecousins/react-pdf": "^7.1.0",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
     "@mui/x-data-grid-pro": "^7.23.6",
     "@mui/x-date-pickers": "^7.23.6",
     "@mui/x-date-pickers-pro": "^7.23.6",
-    "@react-pdf-viewer/core": "^3.12.0",
-    "@react-pdf/render": "^4.3.0",
-    "@react-pdf/renderer": "^4.2.2",
     "@tanstack/react-query": "^5.64.2",
     "antd": "^5.23.0",
     "axios": "^1.7.9",
@@ -28,13 +26,16 @@
     "dayjs": "^1.11.13",
     "jotai": "^2.11.0",
     "mammoth": "^1.9.0",
-    "pdfjs-dist": "^3.11.174",
+    "pdfjs": "^2.5.3",
+    "pdfjs-dist": "^4.10.38",
+    "pdfkit": "^0.16.0",
     "react": "latest",
     "react-cookie": "^7.2.2",
-    "react-doc-viewer": "^0.1.14",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
     "react-intl": "^7.1.6",
+    "react-pdf": "^9.2.1",
+    "react-pdf-js": "^5.1.0",
     "react-router-dom": "^7.1.1",
     "react-time-range": "^1.0.4",
     "rsuite": "^5.76.3"
@@ -60,6 +61,7 @@
     "tailwindcss": "^3.4.17",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5"
+    "vite": "^6.0.5",
+    "vite-plugin-static-copy": "^2.3.0"
   }
 }

@@ -77,3 +77,32 @@ body {
 :where(.css-dev-only-do-not-override-7ny38l).ant-steps .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
   @apply !text-[#000];
 }
+
+/* Стили для контейнера с PDF */
+.pdf-scroll-container {
+  position: relative;
+  height: 800px; /* Высота контейнера */
+  overflow: hidden; /* Скрываем стандартный скроллбар */
+}
+
+/* Стили для внутреннего контейнера с содержимым PDF */
+.pdf-canvas-container {
+  height: 100%;
+  overflow-y: auto; /* Включаем скролл */
+  /* Отступ для кастомного скроллбара */
+}
+
+/* Кастомный скроллбар */
+.pdf-canvas-container::-webkit-scrollbar {
+  width: 8px; /* Ширина скроллбара */
+}
+
+.pdf-canvas-container::-webkit-scrollbar-thumb {
+  background-color: #5c5cff; /* Цвет ползунка */
+  border-radius: 4px; /* Закругление углов */
+}
+
+.pdf-canvas-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Цвет трека */
+  border-radius: 4px; /* Закругление углов */
+}
