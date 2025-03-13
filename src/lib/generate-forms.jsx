@@ -3,14 +3,18 @@ import cn from 'classnames'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { default as GenerateField } from './generate-field'
+import GenerateUseFieldArray from './generate-use-field-array'
 
 export const GenerateForms = ({ fields }) => {
   const { control } = useFormContext()
   const form = fields.map((field, index) => {
-    if (field.type === 'fields_group')
+    if (field.type === 'fields_group') {
+      if (field.imply_duplicates) {
+        return <GenerateUseFieldArray control={control} fieldsApi={field.fields} name={field.description} />
+      }
       return (
         <React.Fragment key={index}>
-          <p>{field.description}</p>
+          <p className="w-full px-5 text-base font-bold mb-2">{field.description}</p>
           {field.fields.map((field, index) => {
             return (
               <Controller
@@ -30,10 +34,9 @@ export const GenerateForms = ({ fields }) => {
           })}
         </React.Fragment>
       )
-    else if (field.type === 'select_single') {
+    } else if (field.type === 'select_single') {
       return (
         <React.Fragment key={index}>
-          <p>{field.description}</p>
           <Controller
             name={field.description}
             control={control}
@@ -55,7 +58,6 @@ export const GenerateForms = ({ fields }) => {
       }))
       return (
         <React.Fragment key={index}>
-          <p>{field.description}</p>
           <Controller
             name={field.description.replaceAll('.', '')}
             control={control}
@@ -78,8 +80,7 @@ export const GenerateForms = ({ fields }) => {
       ]
       return (
         <React.Fragment key={index}>
-          <div className="flex flex-col gap-x-4">
-            <p>{field.description}</p>
+          <div className="w-full px-5 flex flex-col gap-x-4">
             {(field.type === 'date' || field.type === 'time') && field.accept_interval && (
               <Controller
                 name={`${field.description}-isInterval`}

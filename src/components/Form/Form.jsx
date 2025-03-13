@@ -61,7 +61,6 @@ const Form = () => {
       currentStep === 0
         ? transformData(documentData, method.getValues())
         : transformData(nextStageData, method.getValues())
-
     await mutateAsync({
       id: document_id,
       stages: [...stages, ...dataToQuery],
@@ -142,9 +141,9 @@ const Form = () => {
               <Step key={step} />
             ))}
           </Steps>
-          <main className="mx-2 lg:mx-auto max-w-full px-[28px] mt-4">{renderStep(currentStep)}</main>
+          <main className=" lg:mx-auto max-w-full mx-[28px] mt-4">{renderStep(currentStep)}</main>
         </div>
-        <div className="mx-auto max-w-full px-[28px] mt-4 flex justify-center mb-[28px] gap-4">
+        <div className="mx-auto max-w-full px-5 mt-4 flex justify-center mb-[28px] gap-4">
           <Button
             onClick={prev}
             disabled={currentStep === 0}

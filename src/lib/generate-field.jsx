@@ -16,24 +16,29 @@ const GenerateField = ({ type, description, field, options }) => {
   const { control, watch } = useFormContext()
   switch (type) {
     case 'term':
-      return <p>{description}</p>
+      return <p className="w-full px-5">{description}</p>
     case 'text':
       return (
-        <Input
-          {...field}
-          type="text"
-          placeholder={description}
-          className="border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-        />
+        <div className="w-full px-5">
+          <p>{description}</p>
+          <Input
+            {...field}
+            type="text"
+            className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+          />
+        </div>
       )
     case 'email':
       return (
-        <Input
-          {...field}
-          type="email"
-          placeholder={description}
-          className="border-[1px] border-[#CCC2DcontrolC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-        />
+        <div className="w-full px-5">
+          <p>{description}</p>
+          <Input
+            {...field}
+            type="email"
+            placeholder={description}
+            className="w-full border-[1px] border-[#CCC2DcontrolC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+          />
+        </div>
       )
     case 'password':
       return (
@@ -46,7 +51,9 @@ const GenerateField = ({ type, description, field, options }) => {
       )
     case 'time':
       return (
-        <>
+        <div className="w-full px-5">
+          <p>{description}</p>
+
           {watch(`${field.name}-isInterval`) ? (
             <TimeRangePicker
               {...field}
@@ -54,7 +61,7 @@ const GenerateField = ({ type, description, field, options }) => {
               format="HH:mm"
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
             />
-        ) : (
+          ) : (
             <TimePicker
               {...field}
               placeholder={description}
@@ -64,11 +71,13 @@ const GenerateField = ({ type, description, field, options }) => {
               ranges={[]}
             />
           )}
-        </>
+        </div>
       )
     case 'date':
       return (
-        <>
+        <div className="w-full px-5">
+          <p>{description}</p>
+
           {watch(`${field.name}-isInterval`) ? (
             <DateRangePicker
               {...field}
@@ -115,40 +124,46 @@ const GenerateField = ({ type, description, field, options }) => {
               }}
             />
           )}
-        </>
+        </div>
       )
     case 'select_single':
       return (
-        <Select
-          className="border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-          {...field}
-        >
-          {options?.map((item, index) => {
-            if (item.edit_action)
-              return (
-                <MenuItem key={item.text} value={index}>
-                  {item.edit_actions[0].text_to_insert}
-                </MenuItem>
-              )
-            else
-              return (
-                <MenuItem key={item.text} value={index}>
-                  {item.text}
-                </MenuItem>
-              )
-          })}
-        </Select>
+        <div className="w-full px-5">
+          <p>{description}</p>
+
+          <Select
+            className="w-full border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+            {...field}
+          >
+            {options?.map((item, index) => {
+              if (item.edit_action)
+                return (
+                  <MenuItem key={item.text} value={index}>
+                    {item.edit_actions[0].text_to_insert}
+                  </MenuItem>
+                )
+              else
+                return (
+                  <MenuItem key={item.text} value={index}>
+                    {item.text}
+                  </MenuItem>
+                )
+            })}
+          </Select>
+        </div>
       )
     case 'select_multiple':
       return (
-        <div className="">
-          <RadioGroup value={field.value} onChange={field.onChange} className="w-fit">
+        <div className="w-full px-5">
+          <p>{description}</p>
+
+          <RadioGroup value={field.value} onChange={field.onChange} className="w-fit flex flex-col gap-y-2 mt-2">
             {options.map((option) => {
               return (
                 <Radio value={option.value} key={option.value}>
                   {({ checked, disabled }) => (
                     <div
-                      className={cn('gap-small flex cursor-pointer items-center  transition-colors', {
+                      className={cn('gap-small flex cursor-pointer  transition-colors', {
                         'text-main hover:text-main': !checked && !disabled,
                         'text-main': checked && !disabled,
                         '!cursor-not-allowed text-main': disabled,
@@ -169,7 +184,7 @@ const GenerateField = ({ type, description, field, options }) => {
                         />
                       </div>
                       <h4
-                        className={cn('ml-2', {
+                        className={cn('ml-2 max-w-[90%] leading-5', {
                           'text-black': !disabled,
                           'text-background-primary': disabled,
                         })}
@@ -201,12 +216,16 @@ const GenerateField = ({ type, description, field, options }) => {
 
     default:
       return (
-        <Input
-          {...field}
-          type="text"
-          placeholder={description}
-          className="border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
-        />
+        <div className="px-5 w-full">
+          <p>{description}</p>
+
+          <Input
+            {...field}
+            type="text"
+            placeholder={description}
+            className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+          />
+        </div>
       )
   }
 }

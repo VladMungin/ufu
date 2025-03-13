@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 export const transformData = (dataFromAPI, dataFromForm) => {
-  console.log(dataFromAPI)
+  console.log(dataFromForm)
   return [
     {
       name: dataFromAPI.name,
@@ -57,6 +57,32 @@ export const transformData = (dataFromAPI, dataFromForm) => {
             }
           }
           if (field.type === 'fields_group') {
+            if (field.imply_duplicates) {
+              return {
+                type: field.type,
+                groups: dataFromForm[field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')].map(
+                  (group) => {
+                    console.log(group)
+                    return {
+                      fields: field.fields.map((subfield) => {
+                        if (subfield.type === 'date') {
+                          return {
+                            type: subfield.type,
+                            input: dayjs(
+                              group[subfield.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')],
+                            ).format('DD.MM.YYYY'),
+                          }
+                        }
+                        return {
+                          type: subfield.type,
+                          input: group[subfield.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')],
+                        }
+                      }),
+                    }
+                  },
+                ),
+              }
+            }
             return {
               type: field.type,
               groups: [

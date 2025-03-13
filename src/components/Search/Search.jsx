@@ -40,7 +40,12 @@ const Search = () => {
                     </InputAdornment>
                   }
                   variant="borderless"
-                  className="w-full px-3 py-3.5 border border-[#CCC2DC] rounded-xl focus:border-[#CCC2DC] focus:outline-none"
+                  className="w-full px-3 py-3.5 border border-[#CCC2DC] rounded-xl focus:border-[#CCC2DC] focus:outline-none bg-white"
+                  slotProps={{
+                    input: {
+                      className: '!bg-white',
+                    },
+                  }}
                 />
               )
             }}
