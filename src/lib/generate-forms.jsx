@@ -3,11 +3,15 @@ import cn from 'classnames'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { default as GenerateField } from './generate-field'
+import GenerateUseFieldArray from './generate-use-field-array'
 
 export const GenerateForms = ({ fields }) => {
   const { control } = useFormContext()
   const form = fields.map((field, index) => {
-    if (field.type === 'fields_group')
+    if (field.type === 'fields_group') {
+      if (field.imply_duplicates) {
+        return <GenerateUseFieldArray control={control} fieldsApi={field.fields} name={field.description} />
+      }
       return (
         <React.Fragment key={index}>
           <p>{field.description}</p>
@@ -30,7 +34,7 @@ export const GenerateForms = ({ fields }) => {
           })}
         </React.Fragment>
       )
-    else if (field.type === 'select_single') {
+    } else if (field.type === 'select_single') {
       return (
         <React.Fragment key={index}>
           <p>{field.description}</p>

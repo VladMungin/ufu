@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 export const transformData = (dataFromAPI, dataFromForm) => {
-  console.log(dataFromAPI)
+  console.log(dataFromForm)
   return [
     {
       name: dataFromAPI.name,
