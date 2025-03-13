@@ -63,7 +63,7 @@ const Constructor = () => {
               <Loading className="fill-[#5C5CFF] animate-spin w-1/4" />
             </div>
           ) : pdf ? (
-            <div className=" shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto h-[800px] py-5 ">
+            <div className="fixed shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto h-[800px] py-5 ">
               <div
                 ref={canvasRef}
                 style={{ height: '100%', display: 'block' }}
