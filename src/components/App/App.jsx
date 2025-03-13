@@ -13,7 +13,6 @@ import './App.css'
 function App() {
   const queryClient = new QueryClient()
   const location = useLocation()
-  console.log(location)
   return (
     <IntlProvider locale="ru">
       <CustomProvider locale={ruRU}>

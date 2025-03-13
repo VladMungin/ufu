@@ -14,7 +14,7 @@ export const GenerateForms = ({ fields }) => {
       }
       return (
         <React.Fragment key={index}>
-          <p>{field.description}</p>
+          <p className="w-full px-5 text-base font-bold mb-2">{field.description}</p>
           {field.fields.map((field, index) => {
             return (
               <Controller
@@ -37,7 +37,6 @@ export const GenerateForms = ({ fields }) => {
     } else if (field.type === 'select_single') {
       return (
         <React.Fragment key={index}>
-          <p>{field.description}</p>
           <Controller
             name={field.description}
             control={control}
@@ -59,7 +58,6 @@ export const GenerateForms = ({ fields }) => {
       }))
       return (
         <React.Fragment key={index}>
-          <p>{field.description}</p>
           <Controller
             name={field.description.replaceAll('.', '')}
             control={control}
@@ -82,8 +80,7 @@ export const GenerateForms = ({ fields }) => {
       ]
       return (
         <React.Fragment key={index}>
-          <div className="flex flex-col gap-x-4">
-            <p>{field.description}</p>
+          <div className="w-full px-5 flex flex-col gap-x-4">
             {(field.type === 'date' || field.type === 'time') && field.accept_interval && (
               <Controller
                 name={`${field.description}-isInterval`}
