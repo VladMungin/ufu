@@ -50,17 +50,12 @@ const createFieldSchema = (field) => {
     case 'email':
       schema = yup.string().email('Некорректный email')
       break
-    case 'date':
-      schema = yup.date()
-      break
-    case 'time':
-      schema = yup.string()
-      break
+
     case 'select_single':
       schema = yup.string()
       break
     default:
-      schema = yup.string()
+      schema = yup.mixed()
       break
   }
 
@@ -70,81 +65,3 @@ const createFieldSchema = (field) => {
 
   return schema
 }
-
-// Пример использования
-const fields = [
-  {
-    type: 'fields_group',
-    description: 'Введите собственные данные',
-    imply_duplicates: false,
-    fields: [
-      {
-        type: 'text',
-        description: 'Введите ФИО',
-        hint: 'ФИО',
-        blank_forbidden: true,
-      },
-      {
-        type: 'text',
-        description: 'Введите адрес места жительства/места пребывания',
-        hint: 'Адрес',
-        blank_forbidden: true,
-      },
-      {
-        type: 'phone',
-        description: 'Введите номер телефона',
-        blank_forbidden: true,
-      },
-      {
-        type: 'email',
-        description: 'Введите адрес электронной почты',
-        hint: 'Email',
-        blank_forbidden: true,
-      },
-    ],
-  },
-  {
-    type: 'date',
-    description: 'Укажите дату происшествия',
-    accept_interval: true,
-    format: true,
-    blank_forbidden: true,
-  },
-  {
-    type: 'time',
-    description: 'Укажите время происшествия',
-    accept_interval: true,
-    format: true,
-    blank_forbidden: true,
-  },
-  {
-    type: 'select_single',
-    description: 'Укажите район происшествия',
-    options: [
-      {
-        text: 'Ворошиловский',
-      },
-      {
-        text: 'Железнодорожный',
-      },
-      {
-        text: 'Кировский',
-      },
-      {
-        text: 'Ленинский',
-      },
-      {
-        text: 'Октябрьский',
-      },
-      {
-        text: 'Первомайский',
-      },
-      {
-        text: 'Пролетарский',
-      },
-      {
-        text: 'Советский',
-      },
-    ],
-  },
-]

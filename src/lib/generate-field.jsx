@@ -228,7 +228,7 @@ const GenerateField = ({ type, description, field, options, error }) => {
       )
     case 'phone':
       return (
-        <div className="px-5">
+        <div className="w-full px-5 relative my-2">
           <p>{description}</p>
           <InputPhone
             {...field}
@@ -236,6 +236,7 @@ const GenerateField = ({ type, description, field, options, error }) => {
               'w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4'
             }
           />
+          <p className="text-red-600 absolute -bottom-2">{error?.message}</p>
         </div>
       )
     default:
