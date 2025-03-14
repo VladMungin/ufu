@@ -12,32 +12,36 @@ const style = {
   gap: 8,
 }
 
-const GenerateField = ({ type, description, field, options }) => {
-  const { control, watch } = useFormContext()
+const GenerateField = ({ type, description, field, options, error }) => {
+  const { control, watch, formState } = useFormContext()
+  console.log(formState.errors)
   switch (type) {
     case 'term':
-      return <p className="w-full px-5">{description}</p>
+      return <p className="w-full px-5 relative my-2">{description}</p>
     case 'text':
       return (
-        <div className="w-full px-5">
+        <div className="w-full px-5 relative my-2">
           <p>{description}</p>
           <Input
             {...field}
             type="text"
             className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
           />
+          <p className="text-red-600 absolute -bottom-2">{error?.message}</p>
         </div>
       )
     case 'email':
       return (
-        <div className="w-full px-5">
+        <div className="w-full px-5 relative my-2">
           <p>{description}</p>
           <Input
             {...field}
+            error={error}
             type="email"
             placeholder={description}
             className="w-full border-[1px] border-[#CCC2DcontrolC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
           />
+          <p className="text-red-600  absolute -bottom-2">{error?.message}</p>
         </div>
       )
     case 'password':
@@ -45,18 +49,20 @@ const GenerateField = ({ type, description, field, options }) => {
         <Input
           {...field}
           type="password"
+          error={error}
           placeholder={description}
           className="border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
         />
       )
     case 'time':
       return (
-        <div className="w-full px-5">
+        <div className="w-full px-5 relative my-2">
           <p>{description}</p>
 
           {watch(`${field.name}-isInterval`) ? (
             <TimeRangePicker
               {...field}
+              error={error}
               placeholder={description}
               format="HH:mm"
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
@@ -66,16 +72,18 @@ const GenerateField = ({ type, description, field, options }) => {
               {...field}
               placeholder={description}
               format="HH:mm"
+              error={error}
               placement="autoVerticalStart"
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
               ranges={[]}
             />
           )}
+          <p className="text-red-600 absolute -bottom-2">{error?.message}</p>
         </div>
       )
     case 'date':
       return (
-        <div className="w-full px-5">
+        <div className="w-full px-5 relative my-2">
           <p>{description}</p>
 
           {watch(`${field.name}-isInterval`) ? (
@@ -84,6 +92,7 @@ const GenerateField = ({ type, description, field, options }) => {
               placeholder={description}
               ranges={[]}
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+              error={error}
               locale={{
                 sunday: 'Su',
                 monday: 'Mo',
@@ -105,6 +114,7 @@ const GenerateField = ({ type, description, field, options }) => {
               {...field}
               placeholder={description}
               ranges={[]}
+              error={error}
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
               locale={{
                 sunday: 'ВС',
@@ -124,11 +134,12 @@ const GenerateField = ({ type, description, field, options }) => {
               }}
             />
           )}
+          <p className="text-red-600 absolute -bottom-2">{error?.message}</p>
         </div>
       )
     case 'select_single':
       return (
-        <div className="w-full px-5">
+        <div className="w-full px-5 relative my-2">
           <p>{description}</p>
 
           <Select
@@ -150,11 +161,12 @@ const GenerateField = ({ type, description, field, options }) => {
                 )
             })}
           </Select>
+          <p className="text-red-600 absolute -bottom-2">{error?.message}</p>
         </div>
       )
     case 'select_multiple':
       return (
-        <div className="w-full px-5">
+        <div className="w-full px-5 relative my-2">
           <p>{description}</p>
 
           <RadioGroup value={field.value} onChange={field.onChange} className="w-fit flex flex-col gap-y-2 mt-2">

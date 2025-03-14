@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Button, Steps } from 'antd'
 import { useSetAtom } from 'jotai'
@@ -9,6 +10,7 @@ import { queryDocumentPreview, querySurvey, querySurveyNext } from '../../api/ap
 import { loadingPreviewAtom, pdfAtom } from '../../store/store'
 import StepFrom from './FormSteps/FirstStep'
 import { transformData } from './FormSteps/lib/transform'
+import { createValidationSchema } from './FormSteps/lib/validation'
 
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
@@ -51,8 +53,12 @@ const Form = () => {
 
   const { Step } = Steps
   const [currentStep, setCurrentStep] = useState(0)
-  const method = useForm()
-
+  const method = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(
+      createValidationSchema(documentData?.frontend_info.fields || nextStageData?.frontend_info.fields),
+    ),
+  })
   const [stages, setStages] = useState([])
 
   const next = async () => {
@@ -153,6 +159,7 @@ const Form = () => {
             Назад
           </Button>
           <Button
+            disabled={!method.formState.isValid}
             onClick={next}
             type="primary"
             className="max-w-[404px] h-[52px] py-3.5 w-1/2 text-base font-semibold bg-[#5C5CFF] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-2xl"

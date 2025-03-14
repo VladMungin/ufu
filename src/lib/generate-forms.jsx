@@ -21,9 +21,10 @@ export const GenerateForms = ({ fields }) => {
                 key={index}
                 name={field?.description}
                 control={control}
-                render={({ field: inputField }) => (
+                render={({ field: inputField, fieldState: { error } }) => (
                   <GenerateField
                     type={field.type}
+                    error={error}
                     description={field.description}
                     field={inputField}
                     options={field?.options}
@@ -40,8 +41,9 @@ export const GenerateForms = ({ fields }) => {
           <Controller
             name={field.description}
             control={control}
-            render={({ field: inputField }) => (
+            render={({ field: inputField, fieldState: { error } }) => (
               <GenerateField
+                error={error}
                 type={field.type}
                 description={field.description}
                 field={inputField}
@@ -61,8 +63,14 @@ export const GenerateForms = ({ fields }) => {
           <Controller
             name={field.description.replaceAll('.', '')}
             control={control}
-            render={({ field: inputField }) => (
-              <GenerateField type={field.type} description={field.description} field={inputField} options={options} />
+            render={({ field: inputField, fieldState: { error } }) => (
+              <GenerateField
+                type={field.type}
+                error={error}
+                description={field.description}
+                field={inputField}
+                options={options}
+              />
             )}
           />
         </React.Fragment>
@@ -85,8 +93,9 @@ export const GenerateForms = ({ fields }) => {
               <Controller
                 name={`${field.description}-isInterval`}
                 control={control}
-                render={({ field }) => (
+                render={({ field, fieldState: { error } }) => (
                   <RadioGroup
+                    error={error}
                     value={field.value}
                     onChange={field.onChange}
                     className="w-fit flex gap-x-4"
@@ -138,8 +147,9 @@ export const GenerateForms = ({ fields }) => {
           <Controller
             name={field.description}
             control={control}
-            render={({ field: inputField }) => (
+            render={({ field: inputField, fieldState: { error } }) => (
               <GenerateField
+                error={error}
                 type={field.type}
                 description={field.description}
                 field={inputField}
