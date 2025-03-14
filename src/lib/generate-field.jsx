@@ -5,6 +5,7 @@ import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { DatePicker, DateRangePicker, TimePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
+import { InputPhone } from '../components/InputPhone/InputPhone'
 
 const style = {
   display: 'flex',
@@ -225,7 +226,18 @@ const GenerateField = ({ type, description, field, options, error }) => {
           )}
         </div>
       )
-
+    case 'phone':
+      return (
+        <div className="px-5">
+          <p>{description}</p>
+          <InputPhone
+            {...field}
+            classNameInput={
+              'w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4'
+            }
+          />
+        </div>
+      )
     default:
       return (
         <div className="px-5 w-full">
