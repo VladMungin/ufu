@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Button, Steps } from 'antd'
-import { useSetAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -15,7 +15,7 @@ import { createValidationSchema } from './FormSteps/lib/validation'
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
   const setPdf = useSetAtom(pdfAtom)
-  const setLoadingPreviewAtom = useSetAtom(loadingPreviewAtom)
+  const [loadingPreview, setLoadingPreviewAtom] = useAtom(loadingPreviewAtom)
 
   const [params] = useSearchParams()
 
@@ -159,7 +159,7 @@ const Form = () => {
             Назад
           </Button>
           <Button
-            disabled={!method.formState.isValid}
+            disabled={!method.formState.isValid || loadingPreview}
             onClick={next}
             type="primary"
             className="max-w-[404px] h-[52px] py-3.5 w-1/2 text-base font-semibold bg-[#5C5CFF] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-2xl"
