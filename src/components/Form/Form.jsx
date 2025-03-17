@@ -1,4 +1,3 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Button, Steps } from 'antd'
 import { useAtom, useSetAtom } from 'jotai'
@@ -10,7 +9,6 @@ import { queryDocumentPreview, querySurvey, querySurveyNext } from '../../api/ap
 import { loadingPreviewAtom, pdfAtom } from '../../store/store'
 import StepFrom from './FormSteps/FirstStep'
 import { transformData } from './FormSteps/lib/transform'
-import { createValidationSchema } from './FormSteps/lib/validation'
 
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
@@ -55,9 +53,9 @@ const Form = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const method = useForm({
     mode: 'onChange',
-    resolver: yupResolver(
-      createValidationSchema(documentData?.frontend_info.fields || nextStageData?.frontend_info.fields),
-    ),
+    // resolver: yupResolver(
+    //   createValidationSchema(documentData?.frontend_info.fields || nextStageData?.frontend_info.fields),
+    // ),
   })
   const [stages, setStages] = useState([])
 
@@ -152,7 +150,7 @@ const Form = () => {
         <div className="mx-auto max-w-full px-5 mt-4 flex justify-center mb-[28px] gap-4">
           <Button
             onClick={prev}
-            disabled={currentStep === 0 || loadingPreview}
+            // disabled={currentStep === 0 || loadingPreview}
             type="default"
             className="max-w-[404px] h-[52px] py-3.5 w-1/2 font-semibold text-base border-[1px] border-[#C4C4FF] rounded-2xl"
           >
