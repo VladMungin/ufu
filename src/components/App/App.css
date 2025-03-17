@@ -331,3 +331,45 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+.rs-calendar-table-cell-selected > .rs-calendar-table-cell-content {
+  @apply bg-[#5C5CFF];
+}
+.rs-calendar-table-cell-selected.rs-calendar-table-cell {
+  @apply hover:!border-transparent;
+}
+.rs-picker-popup
+  .rs-calendar
+  .rs-calendar-table-cell-selected.rs-calendar-table-cell:hover
+  .rs-calendar-table-cell-content:hover {
+  @apply hover:!bg-[#5C5CFF] hover:!text-white;
+}
+.rs-calendar-table-cell-selected.rs-calendar-table-cell:hover > .rs-calendar-table-cell-content {
+  @apply !bg-[#5C5CFF];
+}
+
+.rs-calendar-table-cell {
+  @apply border border-transparent hover:!border-[#5C5CFF] hover:rounded-[4px] hover:!text-[#5C5CFF];
+}
+.rs-calendar-table-cell-content {
+  @apply hover:!bg-white hover:!text-[#5C5CFF];
+}
+
+.rs-calendar-table-cell-is-today > .rs-calendar-table-cell-content {
+  @apply shadow-none;
+}
+
+.rs-picker-popup .rs-calendar .rs-calendar-table-cell:hover .rs-calendar-table-cell-content {
+  @apply hover:!bg-white hover:!text-[#5C5CFF];
+}
+
+.rs-input-group-addon:empty {
+  z-index: -50;
+  background-color: transparent !important;
+  width: 0 !important;
+  padding: 0 !important;
+}
+
+.rs-input {
+  padding: 4px;
+}

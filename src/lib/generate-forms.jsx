@@ -8,7 +8,36 @@ import GenerateUseFieldArray from './generate-use-field-array'
 export const GenerateForms = ({ fields }) => {
   const { control } = useFormContext()
   const form = fields.map((field, index) => {
-    if (field.type === 'fields_group') {
+    if (field.type === 'embedded_text_fields') {
+      return (
+        <div className="">
+          <p className="w-full px-5 text-base font-bold mb-2">{field.description}</p>
+          <div className="w-[93%] mx-auto">
+            {field.components.map((embeddedField) => {
+              if (typeof embeddedField === 'string') {
+                return embeddedField
+              }
+              return (
+                <Controller
+                  key={index}
+                  name={`${field.description}-${embeddedField.description.replaceAll('.', '')}`}
+                  control={control}
+                  render={({ field: inputField, fieldState: { error } }) => (
+                    <GenerateField
+                      type={`${embeddedField.type}-embedded`}
+                      error={error}
+                      description={embeddedField.description}
+                      field={inputField}
+                      options={field?.options}
+                    />
+                  )}
+                />
+              )
+            })}
+          </div>
+        </div>
+      )
+    } else if (field.type === 'fields_group') {
       if (field.imply_duplicates) {
         return <GenerateUseFieldArray control={control} fieldsApi={field.fields} name={field.description} />
       }
@@ -19,7 +48,7 @@ export const GenerateForms = ({ fields }) => {
             return (
               <Controller
                 key={index}
-                name={field?.description}
+                name={field.description.replaceAll('.', '')}
                 control={control}
                 render={({ field: inputField, fieldState: { error } }) => (
                   <GenerateField
@@ -40,7 +69,7 @@ export const GenerateForms = ({ fields }) => {
       return (
         <React.Fragment key={index}>
           <Controller
-            name={field.description}
+            name={field.description.replaceAll('.', '')}
             control={control}
             render={({ field: inputField, fieldState: { error } }) => (
               <GenerateField
@@ -59,12 +88,14 @@ export const GenerateForms = ({ fields }) => {
       const options = field.options.map((option, index) => ({
         text: option.text,
         value: index,
+        input_field: option.input_field || false,
       }))
       return (
         <React.Fragment key={index}>
           <Controller
             name={field.description.replaceAll('.', '')}
             control={control}
+            defaultValue={[]}
             render={({ field: inputField, fieldState: { error } }) => (
               <GenerateField
                 type={field.type}
@@ -148,7 +179,7 @@ export const GenerateForms = ({ fields }) => {
             )}
           </div>
           <Controller
-            name={field.description}
+            name={field.description.replaceAll('.', '')}
             control={control}
             render={({ field: inputField, fieldState: { error } }) => (
               <GenerateField

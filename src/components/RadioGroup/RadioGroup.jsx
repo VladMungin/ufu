@@ -2,7 +2,6 @@ import { Field, RadioGroup as HeadlessRadioGroup, Radio } from '@headlessui/reac
 import cn from 'classnames'
 
 export const RadioGroup = ({ value, options, className, optionClassName, onChange }) => {
-  console.log(value)
   return (
     <HeadlessRadioGroup className={cn('w-fit', className)} value={value} onChange={onChange}>
       {options?.map((option) => (
@@ -13,7 +12,6 @@ export const RadioGroup = ({ value, options, className, optionClassName, onChang
             onClick={(event) => {
               event.stopPropagation()
               onChange(option.value)
-              console.log(option.value)
             }}
             onTouchStart={(event) => {
               event.stopPropagation()

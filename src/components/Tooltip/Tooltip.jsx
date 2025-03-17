@@ -75,7 +75,7 @@ export const Tooltip = ({
   return (
     <>
       <span
-        className={cn(childrenClassName, 'max-w-full')}
+        className={cn(childrenClassName, 'max-w-full cursor-pointer')}
         {...getReferenceProps({ ref })}
         {...(isClickable && { onClick: handleClick })}
       >

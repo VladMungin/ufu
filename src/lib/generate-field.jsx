@@ -1,30 +1,100 @@
-import { Radio, RadioGroup } from '@headlessui/react'
 import { Input, MenuItem, Select } from '@mui/material'
-import cn from 'classnames'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { DatePicker, DateRangePicker, TimePicker, TimeRangePicker } from 'rsuite'
+import { Checkbox, DatePicker, DateRangePicker, TimePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 import { InputPhone } from '../components/InputPhone/InputPhone'
 import { Tooltip } from '../components/Tooltip/Tooltip'
 import { descriptionWithTooltip } from '../helpers/description_with_tooltip'
 
-const style = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 8,
-}
-
 const GenerateField = ({ type, description, tooltips, field, options, error }) => {
-  const { control, watch, formState } = useFormContext()
-  console.log(formState.errors)
+  const { control, watch } = useFormContext()
+  if (type.includes('embedded')) {
+    const placeholderWidth = description.split('').length
+    if (type.includes('date')) {
+      return (
+        <DatePicker
+          {...field}
+          ranges={[]}
+          error={error}
+          className="border-b border-black"
+          cleanable={false}
+          placeholder={description}
+          locale={{
+            sunday: 'ВС',
+            monday: 'ПН',
+            tuesday: 'ВТ',
+            wednesday: 'СР',
+            thursday: 'ЧТ',
+            friday: 'ПТ',
+            saturday: 'СБ',
+            ok: 'OK',
+            today: 'Сегодня',
+            yesterday: 'Завтра',
+            hours: 'Часы',
+            minutes: 'Минуты',
+            seconds: 'Секунды',
+            mar: 'Март',
+          }}
+          caretAs={() => null}
+          style={{
+            width: `${placeholderWidth}ch`,
+          }}
+        />
+      )
+    }
+    return (
+      <Input
+        className="border-b border-black"
+        placeholder={description}
+        {...field}
+        style={{
+          width: `${placeholderWidth}ch`,
+        }}
+      />
+    )
+  }
   switch (type) {
     case 'term':
-      return <p className="w-full px-5 relative my-2">{description}</p>
+      return (
+        <p className="w-full px-5 relative my-2">
+          {tooltips &&
+            descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+              <React.Fragment className="">
+                {crumb.definition ? (
+                  <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                    <span key={index} className="font-bold">
+                      {crumb.text}{' '}
+                    </span>
+                  </Tooltip>
+                ) : (
+                  <span key={index}>{crumb.text} </span>
+                )}
+              </React.Fragment>
+            ))}
+          {!tooltips && description}
+        </p>
+      )
     case 'text':
       return (
         <div className="w-full px-5 relative my-2">
-          <p>{description}</p>
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
           <Input
             {...field}
             type="text"
@@ -36,12 +106,27 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
     case 'email':
       return (
         <div className="w-full px-5 relative my-2">
-          <p>{description}</p>
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
           <Input
             {...field}
             error={error}
             type="email"
-            placeholder={description}
             className="w-full border-[1px] border-[#CCC2DcontrolC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
           />
           <p className="text-red-600  absolute -bottom-2">{error?.message}</p>
@@ -60,20 +145,33 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
     case 'time':
       return (
         <div className="w-full px-5 relative my-2">
-          <p>{description}</p>
-
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
           {watch(`${field.name}-isInterval`) ? (
             <TimeRangePicker
               {...field}
               error={error}
-              placeholder={description}
               format="HH:mm"
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
             />
           ) : (
             <TimePicker
               {...field}
-              placeholder={description}
               format="HH:mm"
               error={error}
               placement="autoVerticalStart"
@@ -87,12 +185,27 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
     case 'date':
       return (
         <div className="w-full px-5 relative my-2">
-          <p>{description}</p>
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
 
           {watch(`${field.name}-isInterval`) ? (
             <DateRangePicker
               {...field}
-              placeholder={description}
               ranges={[]}
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
               error={error}
@@ -115,7 +228,6 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
           ) : (
             <DatePicker
               {...field}
-              placeholder={description}
               ranges={[]}
               error={error}
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
@@ -185,9 +297,56 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
     case 'select_multiple':
       return (
         <div className="w-full px-5 relative my-2">
-          <p>{description}</p>
-
-          <RadioGroup value={field.value} onChange={field.onChange} className="w-fit flex flex-col gap-y-2 mt-2">
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
+          <div className="flex flex-col">
+            {options.map((option) => (
+              <label key={option.value}>
+                <Checkbox
+                  value={option.value}
+                  checked={field.value.includes(option.value)}
+                  onChange={(e) => {
+                    const value = e
+                    const newValue = field.value.includes(value)
+                      ? field.value.filter((val) => val !== value)
+                      : [...field.value, value]
+                    field.onChange(newValue)
+                  }}
+                />
+                {option.text}
+                {field.value.includes(option.value) && option.input_field && (
+                  <Controller
+                    name={`${field.name}-${field.value}-other`}
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <Input
+                          {...field}
+                          className="mt-6 border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4 w-full"
+                        />
+                      )
+                    }}
+                  />
+                )}
+              </label>
+            ))}
+          </div>
+          {/* <RadioGroup value={field.value} onChange={field.onChange} className="w-fit flex flex-col gap-y-2 mt-2">
             {options.map((option) => {
               return (
                 <Radio value={option.value} key={option.value}>
@@ -226,7 +385,7 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
                 </Radio>
               )
             })}
-          </RadioGroup>
+          </RadioGroup> */}
           {field.value === options.length - 1 && (
             <Controller
               name={`${field.name}-other`}
@@ -246,7 +405,23 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
     case 'phone':
       return (
         <div className="w-full px-5 relative my-2">
-          <p>{description}</p>
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
           <InputPhone
             {...field}
             classNameInput={
@@ -259,12 +434,27 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
     default:
       return (
         <div className="px-5 w-full">
-          <p>{description}</p>
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
 
           <Input
             {...field}
             type="text"
-            placeholder={description}
             className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
           />
         </div>
