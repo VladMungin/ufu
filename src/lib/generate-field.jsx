@@ -5,14 +5,53 @@ import { Checkbox, DatePicker, DateRangePicker, TimePicker, TimeRangePicker } fr
 import 'rsuite/dist/rsuite.min.css'
 import { InputPhone } from '../components/InputPhone/InputPhone'
 
-const style = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 8,
-}
-
 const GenerateField = ({ type, description, field, options, error }) => {
   const { control, watch } = useFormContext()
+  if (type.includes('embedded')) {
+    const placeholderWidth = description.split('').length
+    if (type.includes('date')) {
+      return (
+        <DatePicker
+          {...field}
+          ranges={[]}
+          error={error}
+          className="border-b border-black"
+          cleanable={false}
+          placeholder={description}
+          locale={{
+            sunday: 'ВС',
+            monday: 'ПН',
+            tuesday: 'ВТ',
+            wednesday: 'СР',
+            thursday: 'ЧТ',
+            friday: 'ПТ',
+            saturday: 'СБ',
+            ok: 'OK',
+            today: 'Сегодня',
+            yesterday: 'Завтра',
+            hours: 'Часы',
+            minutes: 'Минуты',
+            seconds: 'Секунды',
+            mar: 'Март',
+          }}
+          caretAs={() => null}
+          style={{
+            width: `${placeholderWidth}ch`,
+          }}
+        />
+      )
+    }
+    return (
+      <Input
+        className="border-b border-black"
+        placeholder={description}
+        {...field}
+        style={{
+          width: `${placeholderWidth}ch`,
+        }}
+      />
+    )
+  }
   switch (type) {
     case 'term':
       return <p className="w-full px-5 relative my-2">{description}</p>

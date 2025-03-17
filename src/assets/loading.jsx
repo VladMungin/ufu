@@ -1,7 +1,7 @@
 export const Loading = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
+    fill="transparent"
     preserveAspectRatio="xMinYMid meet"
     viewBox="0 0 30 29"
     {...props}
