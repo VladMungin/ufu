@@ -72,6 +72,7 @@ export const queryDownload = async (request, id) => {
       headers: {
         responseType: 'blob', // important
       },
+      responseType: 'blob',
     },
   )
 
