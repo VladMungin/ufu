@@ -27,6 +27,7 @@ const GenerateUseFieldArray = ({ control, name, fieldsApi }) => {
                     <GenerateField
                       type={field.type}
                       description={field.description}
+                      tooltip={field.tooltip}
                       field={inputField}
                       options={field?.options}
                     />

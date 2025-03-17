@@ -6,6 +6,8 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { DatePicker, DateRangePicker, TimePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 import { InputPhone } from '../components/InputPhone/InputPhone'
+import { Tooltip } from '../components/Tooltip/Tooltip'
+import { descriptionWithTooltip } from '../helpers/description_with_tooltip'
 
 const style = {
   display: 'flex',
@@ -13,7 +15,7 @@ const style = {
   gap: 8,
 }
 
-const GenerateField = ({ type, description, field, options, error }) => {
+const GenerateField = ({ type, description, tooltips, field, options, error }) => {
   const { control, watch, formState } = useFormContext()
   console.log(formState.errors)
   switch (type) {
@@ -141,8 +143,23 @@ const GenerateField = ({ type, description, field, options, error }) => {
     case 'select_single':
       return (
         <div className="w-full px-5 relative my-2">
-          <p>{description}</p>
-
+          <p>
+            {tooltips &&
+              descriptionWithTooltip(description, tooltips).map((crumb, index) => (
+                <React.Fragment className="">
+                  {crumb.definition ? (
+                    <Tooltip label={crumb.definition} className="shadow-[0px_0px_16px_0px_#95A1FF33]">
+                      <span key={index} className="font-bold">
+                        {crumb.text}{' '}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span key={index}>{crumb.text} </span>
+                  )}
+                </React.Fragment>
+              ))}
+            {!tooltips && description}
+          </p>
           <Select
             className="w-full border-[1px] border-[#CCC2DC]  !rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
             {...field}

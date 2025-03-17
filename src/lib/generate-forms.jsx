@@ -26,6 +26,7 @@ export const GenerateForms = ({ fields }) => {
                     type={field.type}
                     error={error}
                     description={field.description}
+                    tooltips={field.tooltips}
                     field={inputField}
                     options={field?.options}
                   />
@@ -46,6 +47,7 @@ export const GenerateForms = ({ fields }) => {
                 error={error}
                 type={field.type}
                 description={field.description}
+                tooltips={field.tooltips}
                 field={inputField}
                 options={field?.options}
               />
@@ -68,6 +70,7 @@ export const GenerateForms = ({ fields }) => {
                 type={field.type}
                 error={error}
                 description={field.description}
+                tooltips={field.tooltips}
                 field={inputField}
                 options={options}
               />
@@ -152,6 +155,7 @@ export const GenerateForms = ({ fields }) => {
                 error={error}
                 type={field.type}
                 description={field.description}
+                tooltips={field.tooltips}
                 field={inputField}
                 options={field?.options}
               />
