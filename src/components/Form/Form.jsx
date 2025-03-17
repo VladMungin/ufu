@@ -72,7 +72,7 @@ const Form = () => {
   const [stages, setStages] = useState([])
 
   const next = async () => {
-    // setLoadingPreviewAtom(true)
+    setLoadingPreviewAtom(true)
     if (nextStageData === null) {
       const res = await queryDownload(stages, document_id)
       const url = window.URL.createObjectURL(new Blob([res]))
@@ -105,7 +105,7 @@ const Form = () => {
     })
 
     setStages((prevStages) => [...prevStages, ...dataToQuery])
-    // setCurrentStep((prev) => prev + 1)
+    setCurrentStep((prev) => prev + 1)
   }
 
   const [currentName, setCurrentName] = useState()
