@@ -18,8 +18,8 @@ import cn from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { TooltipArrowIcon } from '../../assets/icon/tooltip-arrow-icon'
-import { openSide, placementArrow } from './_constants'
 import { mergeRefs } from '../../helpers/merge-refs'
+import { openSide, placementArrow } from './_constants'
 
 export const Tooltip = ({
   children,
@@ -74,13 +74,13 @@ export const Tooltip = ({
   }
   return (
     <>
-      <div
-        className={cn(childrenClassName, 'max-w-full')}
+      <span
+        className={cn(childrenClassName, 'max-w-full cursor-pointer')}
         {...getReferenceProps({ ref })}
         {...(isClickable && { onClick: handleClick })}
       >
         {children}
-      </div>
+      </span>
 
       <AnimatePresence>
         {isActive && open && (
