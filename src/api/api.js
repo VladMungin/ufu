@@ -61,3 +61,19 @@ export const querySuggestDocuments = async (request) => {
 
   return res.data
 }
+
+export const queryDownload = async (request, id) => {
+  const res = await axios.post(
+    `${import.meta.env.VITE_DATA_API}/surveys/${id}/download_document`,
+    {
+      stages: request,
+    },
+    {
+      headers: {
+        responseType: 'blob', // important
+      },
+    },
+  )
+
+  return res.data
+}

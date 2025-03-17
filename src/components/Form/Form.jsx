@@ -5,10 +5,22 @@ import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
-import { queryDocumentPreview, querySurvey, querySurveyNext } from '../../api/api'
+import { queryDocumentPreview, queryDownload, querySurvey, querySurveyNext } from '../../api/api'
 import { loadingPreviewAtom, pdfAtom } from '../../store/store'
 import StepFrom from './FormSteps/FirstStep'
+import LastStep from './FormSteps/last-step'
 import { transformData } from './FormSteps/lib/transform'
+
+export const fileForceDownload = async (url, filename) => {
+  const aElement = document.createElement('a')
+  aElement.download = filename
+  aElement.href = url
+  // For Firefox https://stackoverflow.com/a/32226068
+  document.body.appendChild(aElement)
+  aElement.click()
+  aElement.remove()
+  return url
+}
 
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
@@ -60,11 +72,29 @@ const Form = () => {
   const [stages, setStages] = useState([])
 
   const next = async () => {
-    setLoadingPreviewAtom(true)
+    // setLoadingPreviewAtom(true)
+    if (nextStageData === null) {
+      const res = await queryDownload(stages, document_id)
+      const url = window.URL.createObjectURL(new Blob([res]))
+
+      // Создаем временную ссылку
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `document_${document_id}.docx`) // Имя файла, который будет скачан
+
+      // Добавляем ссылку на страницу и кликаем по ней
+      document.body.appendChild(link)
+      link.click()
+
+      // Удаляем ссылку с страницы
+      link.parentNode.removeChild(link)
+      return
+    }
     const dataToQuery =
       currentStep === 0
         ? transformData(documentData, method.getValues())
         : transformData(nextStageData, method.getValues())
+
     await mutateAsync({
       id: document_id,
       stages: [...stages, ...dataToQuery],
@@ -75,7 +105,7 @@ const Form = () => {
     })
 
     setStages((prevStages) => [...prevStages, ...dataToQuery])
-    setCurrentStep((prev) => prev + 1)
+    // setCurrentStep((prev) => prev + 1)
   }
 
   const [currentName, setCurrentName] = useState()
@@ -124,20 +154,20 @@ const Form = () => {
   }
 
   const renderStep = (step) => {
-    switch (step) {
-      case 0:
-        return <StepFrom data={documentData} />
-      default:
-        return <StepFrom data={nextStageData} />
+    if (step === 0) {
+      return <StepFrom data={documentData} />
     }
+    if (nextStageData === null) {
+      return <LastStep />
+    }
+    return <StepFrom data={nextStageData} />
   }
-
   if (!documentData) return <div className="mx-auto">Загрузка</div>
 
   const stepsArray = Array.from({ length: currentStep + 1 }, (_, index) => index)
 
   return (
-    <div className="lg:w-1/2 rounded-[36px] border-[1px] border-[#C4C4FF] shadow-[0px_0px_16px_0px_#95A1FF33] mx-4">
+    <div className="lg:w-1/2 rounded-[36px] border-[1px] border-[#C4C4FF] shadow-[0px_0px_16px_0px_#95A1FF33] mx-4 flex flex-col justify-between">
       <FormProvider {...method} className="flex flex-col h-full justify-between">
         <div className="">
           <Steps current={currentStep} className="mt-7 px-11 lg:px-[78px]">
@@ -147,10 +177,10 @@ const Form = () => {
           </Steps>
           <main className=" lg:mx-auto max-w-full mx-[28px] mt-4">{renderStep(currentStep)}</main>
         </div>
-        <div className="mx-auto max-w-full px-5 mt-4 flex justify-center mb-[28px] gap-4">
+        <div className="mx-auto w-full px-5 mt-4 flex justify-center mb-[28px] gap-4">
           <Button
             onClick={prev}
-            disabled={currentStep === 0 || loadingPreview}
+            // disabled={currentStep === 0 || loadingPreview}
             type="default"
             className="max-w-[404px] h-[52px] py-3.5 w-1/2 font-semibold text-base border-[1px] border-[#C4C4FF] rounded-2xl"
           >
@@ -162,7 +192,8 @@ const Form = () => {
             type="primary"
             className="max-w-[404px] h-[52px] py-3.5 w-1/2 text-base font-semibold bg-[#5C5CFF] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-2xl"
           >
-            Вперед
+            {nextStageData === null && <img src="/download.svg" />}
+            {nextStageData === null ? 'Скачать' : 'Вперед'}
           </Button>
         </div>
       </FormProvider>
