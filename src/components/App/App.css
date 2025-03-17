@@ -374,6 +374,23 @@ input:-webkit-autofill:active {
   padding: 4px;
 }
 
+/*  */
+
+.ant-steps-horizontal {
+  @apply overflow-x-auto 
+  max-w-[600px]
+  py-4
+  mx-auto
+  [&::-webkit-scrollbar]:h-[1px]
+  [&::-webkit-scrollbar-track]:bg-white
+  [&::-webkit-scrollbar-thumb]:bg-[#5C5CFF]
+  [&::-webkit-scrollbar-thumb]:rounded-xl
+  [&::-webkit-scrollbar-thumb]:pt-8;
+}
+.ant-steps-item {
+  @apply min-w-24;
+}
+
 .rs-checkbox-control .rs-checkbox-inner:before {
   border: #5c5cff 1px solid !important;
   width: 18px;
