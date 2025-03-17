@@ -99,7 +99,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
             if (field.imply_duplicates) {
               return {
                 type: field.type,
-                groups: dataFromForm[field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')].map(
+                groups: dataFromForm[field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll('.', '')].map(
                   (group) => {
                     return {
                       fields: field.fields.map((subfield) => {
@@ -107,13 +107,13 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                           return {
                             type: subfield.type,
                             input: dayjs(
-                              group[subfield.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')],
+                              group[subfield.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll('.', '')],
                             ).format('DD.MM.YYYY'),
                           }
                         }
                         return {
                           type: subfield.type,
-                          input: group[subfield.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')],
+                          input: group[subfield.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll('.', '')],
                         }
                       }),
                     }
@@ -129,12 +129,12 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                     if (subfield.type === 'date') {
                       return {
                         type: subfield.type,
-                        input: dayjs(dataFromForm[subfield.description.replaceAll(' ', '')]).format('DD.MM.YYYY'),
+                        input: dayjs(dataFromForm[subfield.description.replaceAll('.', '')]).format('DD.MM.YYYY'),
                       }
                     }
                     return {
                       type: subfield.type,
-                      input: dataFromForm[subfield.description.replaceAll(' ', '')],
+                      input: dataFromForm[subfield.description.replaceAll('.', '')],
                     }
                   }),
                 },
@@ -143,7 +143,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
           }
           return {
             type: field.type,
-            input: dataFromForm[field.description.replaceAll(' ', '')] || '',
+            input: dataFromForm[field.description.replaceAll('.', '')] || '',
           }
         })
         .filter((field) => field !== undefined),
