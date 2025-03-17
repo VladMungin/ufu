@@ -390,3 +390,20 @@ input:-webkit-autofill:active {
 .ant-steps-item {
   @apply min-w-24;
 }
+
+.rs-checkbox-control .rs-checkbox-inner:before {
+  border: #5c5cff 1px solid !important;
+  width: 18px;
+  height: 18px;
+}
+
+.rs-checkbox-checked .rs-checkbox-control .rs-checkbox-inner:after,
+.rs-checkbox-indeterminate .rs-checkbox-control .rs-checkbox-inner:after {
+  margin-top: 3px;
+  margin-left: 6px;
+}
+
+.rs-checkbox-checked .rs-checkbox-control .rs-checkbox-inner:before,
+.rs-checkbox-indeterminate .rs-checkbox-control .rs-checkbox-inner:before {
+  background: #5c5cff;
+}
