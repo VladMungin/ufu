@@ -316,7 +316,7 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
           </p>
           <div className="flex flex-col">
             {options.map((option) => (
-              <label key={option.value}>
+              <label key={option.value} className="cursor-pointer">
                 <Checkbox
                   value={option.value}
                   checked={field.value.includes(option.value)}
