@@ -297,7 +297,6 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
     case 'select_multiple':
       return (
         <div className="w-full px-5 relative my-2">
-<<<<<<< HEAD
           <p>
             {tooltips &&
               descriptionWithTooltip(description, tooltips).map((crumb, index) => (
@@ -315,9 +314,6 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
               ))}
             {!tooltips && description}
           </p>
-=======
-          <p>{description}</p>
->>>>>>> bb3c67d005ffbcd062e4ed9c34252c185c00f7ea
           <div className="flex flex-col">
             {options.map((option) => (
               <label key={option.value}>
