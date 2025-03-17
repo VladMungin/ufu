@@ -57,12 +57,14 @@ export const GenerateForms = ({ fields }) => {
       const options = field.options.map((option, index) => ({
         text: option.text,
         value: index,
+        input_field: option.input_field || false,
       }))
       return (
         <React.Fragment key={index}>
           <Controller
             name={field.description.replaceAll('.', '')}
             control={control}
+            defaultValue={[]}
             render={({ field: inputField, fieldState: { error } }) => (
               <GenerateField
                 type={field.type}

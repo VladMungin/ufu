@@ -1,7 +1,6 @@
 import dayjs from 'dayjs'
 
 export const transformData = (dataFromAPI, dataFromForm) => {
-  console.log(dataFromForm)
   return [
     {
       name: dataFromAPI.name,
@@ -13,12 +12,12 @@ export const transformData = (dataFromAPI, dataFromForm) => {
           if (field.type === 'select_multiple') {
             return {
               type: field.type,
-              chosen_options: [
-                {
-                  index: dataFromForm[field.description.replaceAll('.', '')],
-                  input: dataFromForm[`${field.description.replaceAll('.', '')}-other`] || '',
-                },
-              ],
+              chosen_options: dataFromForm[field.description.replaceAll('.', '')].map((value) => {
+                return {
+                  index: value,
+                  input: dataFromForm[`${field.description.replaceAll('.', '')}-${value}-other`] || '',
+                }
+              }),
             }
           }
           if (field.type === 'select_single') {
@@ -62,7 +61,6 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                 type: field.type,
                 groups: dataFromForm[field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')].map(
                   (group) => {
-                    console.log(group)
                     return {
                       fields: field.fields.map((subfield) => {
                         if (subfield.type === 'date') {

@@ -1,9 +1,7 @@
-import { Radio, RadioGroup } from '@headlessui/react'
 import { Input, MenuItem, Select } from '@mui/material'
-import cn from 'classnames'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { DatePicker, DateRangePicker, TimePicker, TimeRangePicker } from 'rsuite'
+import { Checkbox, DatePicker, DateRangePicker, TimePicker, TimeRangePicker } from 'rsuite'
 import 'rsuite/dist/rsuite.min.css'
 import { InputPhone } from '../components/InputPhone/InputPhone'
 
@@ -14,8 +12,7 @@ const style = {
 }
 
 const GenerateField = ({ type, description, field, options, error }) => {
-  const { control, watch, formState } = useFormContext()
-  console.log(formState.errors)
+  const { control, watch } = useFormContext()
   switch (type) {
     case 'term':
       return <p className="w-full px-5 relative my-2">{description}</p>
@@ -39,7 +36,6 @@ const GenerateField = ({ type, description, field, options, error }) => {
             {...field}
             error={error}
             type="email"
-            placeholder={description}
             className="w-full border-[1px] border-[#CCC2DcontrolC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
           />
           <p className="text-red-600  absolute -bottom-2">{error?.message}</p>
@@ -64,14 +60,12 @@ const GenerateField = ({ type, description, field, options, error }) => {
             <TimeRangePicker
               {...field}
               error={error}
-              placeholder={description}
               format="HH:mm"
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
             />
           ) : (
             <TimePicker
               {...field}
-              placeholder={description}
               format="HH:mm"
               error={error}
               placement="autoVerticalStart"
@@ -90,7 +84,6 @@ const GenerateField = ({ type, description, field, options, error }) => {
           {watch(`${field.name}-isInterval`) ? (
             <DateRangePicker
               {...field}
-              placeholder={description}
               ranges={[]}
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
               error={error}
@@ -113,7 +106,6 @@ const GenerateField = ({ type, description, field, options, error }) => {
           ) : (
             <DatePicker
               {...field}
-              placeholder={description}
               ranges={[]}
               error={error}
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
@@ -169,8 +161,39 @@ const GenerateField = ({ type, description, field, options, error }) => {
       return (
         <div className="w-full px-5 relative my-2">
           <p>{description}</p>
-
-          <RadioGroup value={field.value} onChange={field.onChange} className="w-fit flex flex-col gap-y-2 mt-2">
+          <div className="flex flex-col">
+            {options.map((option) => (
+              <label key={option.value}>
+                <Checkbox
+                  value={option.value}
+                  checked={field.value.includes(option.value)}
+                  onChange={(e) => {
+                    const value = e
+                    const newValue = field.value.includes(value)
+                      ? field.value.filter((val) => val !== value)
+                      : [...field.value, value]
+                    field.onChange(newValue)
+                  }}
+                />
+                {option.text}
+                {field.value.includes(option.value) && option.input_field && (
+                  <Controller
+                    name={`${field.name}-${field.value}-other`}
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <Input
+                          {...field}
+                          className="mt-6 border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4 w-full"
+                        />
+                      )
+                    }}
+                  />
+                )}
+              </label>
+            ))}
+          </div>
+          {/* <RadioGroup value={field.value} onChange={field.onChange} className="w-fit flex flex-col gap-y-2 mt-2">
             {options.map((option) => {
               return (
                 <Radio value={option.value} key={option.value}>
@@ -209,7 +232,7 @@ const GenerateField = ({ type, description, field, options, error }) => {
                 </Radio>
               )
             })}
-          </RadioGroup>
+          </RadioGroup> */}
           {field.value === options.length - 1 && (
             <Controller
               name={`${field.name}-other`}
@@ -247,7 +270,6 @@ const GenerateField = ({ type, description, field, options, error }) => {
           <Input
             {...field}
             type="text"
-            placeholder={description}
             className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
           />
         </div>

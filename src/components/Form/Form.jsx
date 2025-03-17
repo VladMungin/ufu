@@ -1,4 +1,3 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Button, Steps } from 'antd'
 import { useAtom, useSetAtom } from 'jotai'
@@ -10,7 +9,6 @@ import { queryDocumentPreview, querySurvey, querySurveyNext } from '../../api/ap
 import { loadingPreviewAtom, pdfAtom } from '../../store/store'
 import StepFrom from './FormSteps/FirstStep'
 import { transformData } from './FormSteps/lib/transform'
-import { createValidationSchema } from './FormSteps/lib/validation'
 
 const Form = () => {
   const [tokens] = useCookies(['access_token'])
@@ -55,9 +53,9 @@ const Form = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const method = useForm({
     mode: 'onChange',
-    resolver: yupResolver(
-      createValidationSchema(documentData?.frontend_info.fields || nextStageData?.frontend_info.fields),
-    ),
+    // resolver: yupResolver(
+    //   createValidationSchema(documentData?.frontend_info.fields || nextStageData?.frontend_info.fields),
+    // ),
   })
   const [stages, setStages] = useState([])
 
