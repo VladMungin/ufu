@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@floating-ui/react-dom-interactions": "^0.13.3",
     "@headlessui/react": "^2.2.0",
     "@mikecousins/react-pdf": "^7.1.0",
     "@mui/icons-material": "^6.4.7",
@@ -24,6 +25,7 @@
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.5.0",
     "jotai": "^2.11.0",
     "pdfjs-dist": "latest",
     "pdfkit": "^0.16.0",
