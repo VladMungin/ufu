@@ -173,17 +173,17 @@ const Form = () => {
   const stepsArray = Array.from({ length: currentStep + 1 }, (_, index) => index)
 
   return (
-    <div className="lg:w-1/2 rounded-[36px] border-[1px] border-[#C4C4FF] shadow-[0px_0px_16px_0px_#95A1FF33] mx-4 flex flex-col justify-between">
+    <div className="md:w-1/2 rounded-[36px] border-[1px] border-[#C4C4FF] shadow-[0px_0px_16px_0px_#95A1FF33] mx-4 flex flex-col justify-between">
       <FormProvider {...method} className="flex flex-col h-full justify-between">
         <div className="">
-          <Steps current={currentStep} className="mt-7 px-11 lg:px-[78px]">
+          <Steps current={currentStep} responsive={false} className="mt-7 px-4 md:px-[78px]">
             {stepsArray.map((step) => (
               <Step key={step} />
             ))}
           </Steps>
-          <main className=" lg:mx-auto max-w-full mx-[28px] mt-4">{renderStep(currentStep)}</main>
+          <main className="max-w-full md:mx-[28px] mt-4">{renderStep(currentStep)}</main>
         </div>
-        <div className="mx-auto w-full px-5 mt-4 flex justify-center mb-[28px] gap-4">
+        <div className="mx-auto w-full px-4 mt-4 flex justify-center mb-[28px] gap-4">
           <Button
             onClick={prev}
             // disabled={currentStep === 0 || loadingPreview}

@@ -11,7 +11,7 @@ export const GenerateForms = ({ fields, name }) => {
     if (field.type === 'embedded_text_fields') {
       return (
         <div className="">
-          <p className="w-full px-5 text-base font-bold mb-2">{field.description}</p>
+          <p className="w-full px-4 text-base font-bold mb-2">{field.description}</p>
           <div className="w-[93%] mx-auto">
             {field.components.map((embeddedField) => {
               if (typeof embeddedField === 'string') {
@@ -43,7 +43,7 @@ export const GenerateForms = ({ fields, name }) => {
       }
       return (
         <React.Fragment key={index}>
-          <p className="w-full px-5 text-base font-bold mb-2">{field.description}</p>
+          <p className="w-full px-4 text-base font-bold mb-2">{field.description}</p>
           {field.fields.map((field, index) => {
             return (
               <Controller
@@ -122,7 +122,7 @@ export const GenerateForms = ({ fields, name }) => {
       ]
       return (
         <React.Fragment key={index}>
-          <div className="w-full px-5 flex flex-col gap-x-4">
+          <div className="w-full px-4 flex flex-col gap-x-4">
             {(field.type === 'date' || field.type === 'time') && field.accept_interval && (
               <Controller
                 name={`${field.description}-isInterval`}

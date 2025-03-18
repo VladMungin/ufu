@@ -49,7 +49,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <div className="w-[428px] mx-auto flex flex-col items-center justify-center min-h-[75vh]">
+    <div className="max-w-[428px] px-4 mx-auto flex flex-col items-center justify-center min-h-[75vh]">
       <h1 className="w-full text-left font-medium text-2xl tracking-[0.015] mb-2">Авторизация</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full min-h-[392px] flex flex-col gap-y-4">
         <Controller
@@ -88,10 +88,9 @@ const Login = () => {
               <button
                 onClick={() => setShowPassword((prev) => !prev)}
                 type="button"
-                class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden  dark:text-neutral-600 "
+                class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden  dark:text-neutral-600"
               >
                 <svg
-                  class="shrink-0 size-3.5"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -132,7 +131,7 @@ const Login = () => {
         <Link
           to="/register"
           type="button"
-          className="text-center hover:no-underline hover:text-[#5C5CFF] border-[1px] border-[#C4C4FF] py-4  text-[#5C5CFF] tracking-[0.1px] font-semibold text-base rounded-xl shadow-[0px_0px_16px_0px_#95A1FF33]
+          className="text-center hover:no-underline hover:text-[#5C5CFF] border-[1px] border-[#C4C4FF] py-4  text-[#5C5CFF] tracking-[0.1px] font-semibold text-base rounded-xl shadow-[0px_0px_16px_0px_#95A1FF33] bg-white
 "
         >
           Забыли пароль?
@@ -140,7 +139,7 @@ const Login = () => {
         <Link
           to="/register"
           type="button"
-          className="text-center hover:no-underline hover:text-[#5C5CFF] border-[1px] border-[#C4C4FF] py-4  text-[#5C5CFF] tracking-[0.1px] font-semibold text-base rounded-xl shadow-[0px_0px_16px_0px_#95A1FF33]
+          className="text-center hover:no-underline hover:text-[#5C5CFF] border-[1px] border-[#C4C4FF] py-4  text-[#5C5CFF] tracking-[0.1px] font-semibold text-base rounded-xl shadow-[0px_0px_16px_0px_#95A1FF33] bg-white
 "
         >
           Еще нет аккаунта?

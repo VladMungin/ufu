@@ -27,10 +27,10 @@ const Search = () => {
     mutateAsync(data['doc-name'])
   }
   return (
-    <div className="max-w-[1920px] mx-auto px-[68px]">
+    <div className="max-w-[1920px] mx-auto px-4 md:px-[68px]">
       <form onSubmit={handleSubmit(onSubmit)} className="relative flex flex-col max-w-[1112px] ">
-        <h1 className="text-[#5C5CFF] text-[48px] font-bold">ЮрТехник</h1>
-        <div className="flex gap-x-4 mt-5 pt-5 items-center">
+        <h1 className="text-[#5C5CFF] text-[24px] md:text-[48px] font-bold">ЮрТехник</h1>
+        <div className="flex gap-x-4 md:mt-5 md:pt-5 items-center flex-col md:flex-row gap-y-3 ">
           <Controller
             name="doc-name"
             control={control}
@@ -47,7 +47,7 @@ const Search = () => {
                     </InputAdornment>
                   }
                   variant="borderless"
-                  className="w-full px-3 py-3.5 border border-[#CCC2DC] rounded-xl focus:border-[#CCC2DC] focus:outline-none bg-white"
+                  className="w-full px-3 py-[9px] border border-[#CCC2DC] rounded-xl focus:border-[#CCC2DC] focus:outline-none bg-white"
                   slotProps={{
                     input: {
                       className: '!bg-white',
@@ -58,7 +58,7 @@ const Search = () => {
             }}
           />
           <Button
-            className="search-button"
+            className="search-button w-full md:w-auto h-[52px] "
             disabled={isDisabled}
             onClick={() => {
               onSubmit({ 'doc-name': watch('doc-name') })
@@ -67,12 +67,12 @@ const Search = () => {
             Искать
           </Button>
         </div>
-        {error && <p className="absolute -bottom-7 left-2 text-red-600">{error.message}</p>}
+        {error && <p className="mt-4 text-red-600">{error.message}</p>}
       </form>
       {searchedDocument && (
         <div className="flex flex-col mt-9">
           <div className="text-[#5C5CFF] text-xl">Скорей всего, вам подойдет этот тип документа:</div>
-          <div className="grid grid-cols-3 gap-3 mt-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
             {searchedDocument &&
               searchedDocument.map((document) => (
                 <Link
@@ -81,7 +81,7 @@ const Search = () => {
                   className="flex gap-1.5 bg-white rounded-2xl shadow-[0px_0px_16px_0px_#95A1FF33] pl-3 pt-4 pb-4"
                 >
                   {/* <img src="/note_alt.svg" /> */}
-                  <div className="flex flex-col gap-4 ">
+                  <div className="flex flex-col gap-4 max-w-[95%]">
                     <h3 className="font-bold leading-6">{document.name}</h3>
                     <span>
                       {document.description &&
