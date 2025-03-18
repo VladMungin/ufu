@@ -6,7 +6,7 @@ const StepFrom = ({ data }) => {
 
   return (
     <div className="flex flex-col">
-      <GenerateForms fields={data.frontend_info.fields} />
+      <GenerateForms fields={data.frontend_info.fields} name={data.name}/>
     </div>
   )
 }

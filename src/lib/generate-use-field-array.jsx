@@ -3,9 +3,9 @@ import cn from 'classnames'
 import React from 'react'
 import { Controller, useFieldArray } from 'react-hook-form'
 import GenerateField from './generate-field'
-const GenerateUseFieldArray = ({ control, name, fieldsApi }) => {
+const GenerateUseFieldArray = ({ control, name, fieldsApi, stepsName }) => {
   const { fields, append, remove } = useFieldArray({
-    name: name.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', ''),
+    name: `${stepsName}-${name.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}`,
     control,
   })
   return (
@@ -17,8 +17,8 @@ const GenerateUseFieldArray = ({ control, name, fieldsApi }) => {
             {fieldsApi.map((field) => {
               return (
                 <Controller
-                  key={`${name.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}.${index}.${field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}`}
-                  name={`${name.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}.${index}.${field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}`}
+                  key={`${stepsName}-${name.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}.${index}.${field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}`}
+                  name={`${stepsName}-${name.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}.${index}.${field.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}`}
                   control={control}
                   render={({ field: inputField }) => (
                     <GenerateField
