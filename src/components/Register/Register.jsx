@@ -49,7 +49,7 @@ const Register = () => {
   }
   const [showPassword, setShowPassword] = useState(false)
   return (
-    <div className="w-[428px] mx-auto flex flex-col items-center justify-center min-h-[75vh]">
+    <div className="max-w-[428px] px-4 mx-auto flex flex-col items-center justify-center min-h-[75vh]">
       <h1 className="w-full text-left font-medium text-2xl tracking-[0.015] mb-2">Регистрация</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full min-h-[392px] flex flex-col gap-y-4">
         <Controller

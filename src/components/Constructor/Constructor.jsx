@@ -43,7 +43,7 @@ const Constructor = () => {
               const separator = document.createElement('div')
               separator.style.height = '10px' // высота полосы
               separator.style.backgroundColor = '#000' // цвет полосы
-              separator.style.width = '100%' // ширина полосы
+              separator.style.width = `${viewport.width}px` // ширина полосы
               separator.style.margin = '0' // убрать отступы
               canvasRef.current.appendChild(separator)
             }
@@ -54,26 +54,28 @@ const Constructor = () => {
   }, [pdfDocument, numPages])
 
   return (
-    <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh] lg:flex-row flex-col ">
+    <div className="bg-white flex justify-center gap-6 mt-6 min-h-[80vh] md:flex-row flex-col ">
       <Form />
-      <div className="w-1/2">
-        <div className="relative h-full overflow-auto">
+      <div className="md:w-1/2 px-4 md:px-0">
+        <div className="relative h-[600px] md:h-full overflow-auto">
           {isLoadingPreview ? (
-            <div className="h-full flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF]">
+            <div className="h-[600px] md:h-full flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF]">
               <Loading className="fill-[#5C5CFF] animate-spin w-1/4" />
             </div>
           ) : pdf ? (
-            <div className="fixed shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto h-[800px] py-5 ">
+            <div className="md:fixed h-[600px] md:h-[720px] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto  py-5 ">
               <div
                 ref={canvasRef}
                 style={{ height: '100%', display: 'block' }}
-                className="pdf-canvas-container overflow-x-hidden mx-auto mr-1"
+                className="pdf-canvas-container overflow-x mx-auto mr-1"
               />
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF]">
+            <div className="h-[600px] flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] md:h-[720px]">
               <img src="/logo.svg" alt="" className="w-1/2" />
-              <h3 className="text-[50px] mt-14 text-[#5C5CFF]">Здесь будет документ</h3>
+              <h3 className="text-2xl md:leading-10 text-center md:text-[50px] mt-14 text-[#5C5CFF]">
+                Здесь будет документ
+              </h3>
             </div>
           )}
         </div>
