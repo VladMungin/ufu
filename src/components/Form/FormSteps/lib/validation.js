@@ -1,5 +1,12 @@
 import * as yup from 'yup'
 
+export const loginValidation = () => {
+  return yup.object().shape({
+    email: yup.string().email('Неправильный формат почты').required('Электронная почта обязательна'),
+    password: yup.string().min(8, 'Пароль должен быть не менее 8 символов').required('Пароль обязательен'),
+  })
+}
+
 export const createValidationSchema = (fields) => {
   if (fields === undefined) {
     return yup.object().shape({})
