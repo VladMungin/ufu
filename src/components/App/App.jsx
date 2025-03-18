@@ -3,6 +3,7 @@ import { Provider } from 'jotai'
 import { CookiesProvider } from 'react-cookie'
 import { IntlProvider } from 'react-intl'
 import { useLocation } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import { CustomProvider } from 'rsuite'
 import { ruRU } from 'rsuite/esm/locales'
 import AppRoutes from '../../Routes/Routes'
@@ -27,6 +28,7 @@ function App() {
                 </div>
                 <Footer />
               </div>
+              <ToastContainer />
             </QueryClientProvider>
           </Provider>
         </CookiesProvider>

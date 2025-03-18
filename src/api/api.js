@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export const queryRegister = async ({ email, password }) => {
   const res = await axios.post(`${import.meta.env.VITE_AUTH_API}/auth/register`, {
@@ -31,27 +32,40 @@ export const querySurvey = async (token, id) => {
 }
 
 export const querySurveyNext = async (id, stages) => {
-  const res = await axios.post(`${import.meta.env.VITE_DATA_API}/surveys/${id}/next_stage`, {
-    stages,
-  })
-
-  return res.data
+  try {
+    const res = await axios.post(`${import.meta.env.VITE_DATA_API}/surveys/${id}/next_stage`, {
+      stages,
+    })
+    return res.data
+  } catch (err) {
+    toast.error('Не удалось загрузить следующие шаги формы, возможно вы неправильно заполнили поля предыдущего шага')
+  }
 }
 
 export const queryDocumentPreview = async (id, stages) => {
-  const res = await axios.post(
-    `${import.meta.env.VITE_DATA_API}/surveys/${id}/document_preview`,
-    {
-      stages,
-    },
-    {
-      headers: {
-        responseType: 'blob', // important
+  try {
+    const res = await axios.post(
+      `${import.meta.env.VITE_DATA_API}/surveys/${id}/document_preview`,
+      {
+        stages,
       },
-    },
-  )
-
-  return res.data
+      {
+        headers: {
+          responseType: 'blob', // important
+        },
+      },
+    )
+    return res.data
+  } catch (err) {
+    toast.error('Не удалось загрузить следующие шаги формы, возможно вы неправильно заполнили поля предыдущего шага', {
+      autoClose: 5000,
+      position: 'top-right',
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  }
 }
 
 export const querySuggestDocuments = async (request) => {

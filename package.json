@@ -39,6 +39,7 @@
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^7.1.1",
     "react-time-range": "^1.0.4",
+    "react-toastify": "^11.0.5",
     "rsuite": "^5.76.3",
     "vite-plugin-top-level-await": "^1.5.0",
     "yup": "^1.6.1"

@@ -2,6 +2,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { Input, InputAdornment } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
 import { Button } from 'antd'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { querySuggestDocuments } from '../../api/api'
@@ -10,10 +11,16 @@ import './style.css'
 const Search = () => {
   const { control, watch, handleSubmit } = useForm()
   const isDisabled = !watch('doc-name')
-
+  const [error, setError] = useState()
   const { mutateAsync, data: searchedDocument } = useMutation({
     mutationFn: querySuggestDocuments,
     mutationKey: ['doc-name'],
+    onError: (error) => {
+      setError(error.response.data)
+    },
+    onSuccess: () => {
+      setError(null)
+    },
   })
 
   const onSubmit = (data) => {
@@ -21,7 +28,7 @@ const Search = () => {
   }
   return (
     <div className="max-w-[1920px] mx-auto px-[68px]">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col max-w-[1112px] ">
+      <form onSubmit={handleSubmit(onSubmit)} className="relative flex flex-col max-w-[1112px] ">
         <h1 className="text-[#5C5CFF] text-[48px] font-bold">ЮрТехник</h1>
         <div className="flex gap-x-4 mt-5 pt-5 items-center">
           <Controller
@@ -60,6 +67,7 @@ const Search = () => {
             Искать
           </Button>
         </div>
+        {error && <p className="absolute -bottom-7 left-2 text-red-600">{error.message}</p>}
       </form>
       {searchedDocument && (
         <div className="flex flex-col mt-9">

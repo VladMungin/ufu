@@ -25,7 +25,6 @@ export const descriptionWithTooltip = (description, tooltips) => {
     if (remainingText.trim() !== '') {
       result.push({ text: remainingText.trim() })
     }
-    console.log(result)
     return result
   } else return description
 }

@@ -50,6 +50,9 @@ const Form = () => {
   const { mutateAsync, data: nextStageData } = useMutation({
     mutationKey: ['next-stage', document_id],
     mutationFn: ({ id, stages }) => querySurveyNext(id, stages),
+    onError: () => {
+      setLoadingPreviewAtom(false)
+    },
   })
 
   const { mutateAsync: getDocumentPreview, isPending } = useMutation({
@@ -57,6 +60,9 @@ const Form = () => {
     mutationFn: ({ id, stages }) => queryDocumentPreview(id, stages),
     onSuccess: (data) => {
       setPdf(data.filename)
+      setLoadingPreviewAtom(false)
+    },
+    onError: () => {
       setLoadingPreviewAtom(false)
     },
   })

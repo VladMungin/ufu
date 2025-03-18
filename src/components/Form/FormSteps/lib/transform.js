@@ -1,7 +1,6 @@
 import dayjs from 'dayjs'
 
 export const transformData = (dataFromAPI, dataFromForm) => {
-  console.log(dataFromForm)
   return [
     {
       name: dataFromAPI.name,
@@ -125,7 +124,6 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                           ).format('DD.MM.YYYY'),
                         }
                       }
-                      console.log(`${subfield.description.replace(/[\p{P}\p{S}]/gu, '').replaceAll('.', '')}`)
                       return {
                         type: subfield.type,
                         input:
