@@ -33,6 +33,7 @@ const Constructor = () => {
           canvas.width = viewport.width
           canvas.style.marginLeft = 'auto'
           canvas.style.marginRight = 'auto'
+          canvas.style.maxWidth = '100%'
           const renderContext = {
             canvasContext: context,
             viewport: viewport,
@@ -44,7 +45,7 @@ const Constructor = () => {
               separator.style.height = '10px' // высота полосы
               separator.style.backgroundColor = '#000' // цвет полосы
               separator.style.width = `${viewport.width}px` // ширина полосы
-              separator.style.margin = '0' // убрать отступы
+              separator.style.margin = '0' // убрать отступ
               canvasRef.current.appendChild(separator)
             }
           })
@@ -63,7 +64,7 @@ const Constructor = () => {
               <Loading className="fill-[#5C5CFF] animate-spin w-1/4" />
             </div>
           ) : pdf ? (
-            <div className="md:fixed h-[600px] md:h-[720px] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto  py-5 ">
+            <div className="  md:fixed h-[600px] md:h-[720px] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto  py-5 ">
               <div
                 ref={canvasRef}
                 style={{ height: '100%', display: 'block' }}
