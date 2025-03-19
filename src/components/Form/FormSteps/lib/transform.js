@@ -20,7 +20,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                         type: component.type,
                         input: dayjs(
                           dataFromForm[
-                            `${dataFromAPI.name}-${`${dataFromAPI.name}-${field.description.replaceAll('.', '')}`}-${component.description.replaceAll('.', '')}`
+                            `${dataFromAPI.name}-${field.description.replaceAll('.', '')}-${component.description.replaceAll('.', '')}`
                           ],
                         ).format('DD.MM.YYYY'),
                       })
@@ -29,7 +29,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                         type: component.type,
                         input:
                           dataFromForm[
-                            `${dataFromAPI.name}-${`${dataFromAPI.name}-${field.description.replaceAll('.', '')}`}-${component.description.replaceAll('.', '')}`
+                            `${dataFromAPI.name}-${field.description.replaceAll('.', '')}-${component.description.replaceAll('.', '')}`
                           ],
                       })
                     }
@@ -37,7 +37,7 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                 })
               }
             })
-
+            console.log(components)
             return {
               type: field.type,
               components: [
