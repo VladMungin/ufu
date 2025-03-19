@@ -50,17 +50,17 @@ export const transformData = (dataFromAPI, dataFromForm) => {
           if (field.type === 'select_multiple') {
             return {
               type: field.type,
-              chosen_options: dataFromForm[
-                `${dataFromAPI.name}-${`${dataFromAPI.name}-${field.description.replaceAll('.', '')}`}`
-              ].map((value) => {
-                return {
-                  index: value,
-                  input:
-                    dataFromForm[
-                      `${dataFromAPI.name}-${`${dataFromAPI.name}-${field.description.replaceAll('.', '')}`}-${value}-other`
-                    ] || '',
-                }
-              }),
+              chosen_options: dataFromForm[`${dataFromAPI.name}-${field.description.replaceAll('.', '')}`].map(
+                (value) => {
+                  console.log(dataFromForm)
+                  console.log(`${dataFromAPI.name}-${field.description.replaceAll('.', '')}-${value}-other`)
+                  return {
+                    index: value,
+                    input:
+                      dataFromForm[`${dataFromAPI.name}-${field.description.replaceAll('.', '')}-${value}-other`] || '',
+                  }
+                },
+              ),
             }
           }
           if (field.type === 'select_single') {

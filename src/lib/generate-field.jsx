@@ -331,7 +331,7 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
                 {option.text}
                 {field.value.includes(option.value) && option.input_field && (
                   <Controller
-                    name={`${field.name}-${field.value}-other`}
+                    name={`${field.name}-${option.value}-other`}
                     control={control}
                     render={({ field }) => {
                       return (
