@@ -186,7 +186,7 @@ const Form = () => {
         <div className="mx-auto w-full px-4 mt-4 flex justify-center mb-[28px] gap-4">
           <Button
             onClick={prev}
-            // disabled={currentStep === 0 || loadingPreview}
+            disabled={currentStep === 0 || loadingPreview}
             type="default"
             className="max-w-[404px] h-[52px] py-3.5 w-1/2 font-semibold text-base border-[1px] border-[#C4C4FF] rounded-2xl"
           >

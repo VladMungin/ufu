@@ -7,8 +7,14 @@ import { loadingPreviewAtom, pdfAtom } from '../../store/store'
 import Form from '../Form/Form.jsx'
 
 const Constructor = () => {
-  const [pdf] = useAtom(pdfAtom)
-  const [isLoadingPreview] = useAtom(loadingPreviewAtom)
+  const [pdf, setPdf] = useAtom(pdfAtom)
+  const [isLoadingPreview, setIsLoadingPreview] = useAtom(loadingPreviewAtom)
+  useEffect(() => {
+    return () => {
+      setIsLoadingPreview(false)
+      setPdf('')
+    }
+  }, [])
 
   const canvasRef = useRef(null)
   const [numPages, setNumPages] = useState(null)
@@ -63,7 +69,7 @@ const Constructor = () => {
             <div className="h-[600px] md:h-full flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF]">
               <Loading className="fill-[#5C5CFF] animate-spin w-1/4" />
             </div>
-          ) : pdf ? (
+          ) : !!pdf ? (
             <div className="  md:fixed h-[600px] md:h-[720px] shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] overflow-auto  py-5 ">
               <div
                 ref={canvasRef}
