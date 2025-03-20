@@ -17,7 +17,6 @@ export const TruncateContainer = ({
   text,
 }) => {
   const ref = useRef(children)
-  console.log(ref.current.clientWidth)
   const [isTruncated, setIsTruncated] = useState(false)
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { Button } from '@headlessui/react'
 import cn from 'classnames'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Controller, useFieldArray } from 'react-hook-form'
 import GenerateField from './generate-field'
 const GenerateUseFieldArray = ({ control, name, fieldsApi, stepsName }) => {
@@ -8,6 +8,11 @@ const GenerateUseFieldArray = ({ control, name, fieldsApi, stepsName }) => {
     name: `${stepsName}-${name.replace(/[\p{P}\p{S}]/gu, '').replaceAll(' ', '')}`,
     control,
   })
+
+  useEffect(() => {
+    append()
+  }, [])
+
   return (
     <div className="flex flex-col items-center">
       {fields.map((item, index) => {

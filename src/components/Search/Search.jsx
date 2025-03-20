@@ -78,15 +78,19 @@ const Search = () => {
                 <Link
                   key={document.id}
                   to={`/constructor?document_id=${document.id}`}
-                  className="flex gap-1.5 bg-white rounded-2xl shadow-[0px_0px_16px_0px_#95A1FF33] pl-3 pt-4 pb-4"
+                  className="flex gap-1.5 bg-white rounded-2xl shadow-[0px_0px_16px_0px_#95A1FF33] pl-3 pt-4 pb-4 !no-underline"
                 >
-                  {/* <img src="/note_alt.svg" /> */}
                   <div className="flex flex-col gap-4 max-w-[95%]">
-                    <h3 className="font-bold leading-6">{document.name}</h3>
+                    <h3 className="font-bold leading-6 hover:text-[#5C5CFF] transition-colors duration-300 !no-underline">
+                      {document.name}
+                    </h3>
                     <span>
                       {document.description &&
                         splitStringByNumber(document.description)?.map((item) => (
-                          <li className="list-none" key={item}>
+                          <li
+                            className="list-none hover:text-[#5C5CFF] transition-colors duration-300 !no-underline"
+                            key={item}
+                          >
                             {item}
                           </li>
                         ))}
