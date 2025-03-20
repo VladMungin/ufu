@@ -7,9 +7,11 @@ import { InputPhone } from '../components/InputPhone/InputPhone'
 import { Tooltip } from '../components/Tooltip/Tooltip'
 import { TruncateContainer } from '../components/TrunContainer/TrunContainer'
 import { descriptionWithTooltip } from '../helpers/description_with_tooltip'
+import { useWindowDimensions } from '../hooks/use-window-demisions'
 
 const GenerateField = ({ type, description, tooltips, field, options, error }) => {
   const { control, watch } = useFormContext()
+  const { isMobile } = useWindowDimensions()
   if (type.includes('embedded')) {
     const placeholderWidth = description.split('').length
 
@@ -218,6 +220,7 @@ const GenerateField = ({ type, description, tooltips, field, options, error }) =
               {...field}
               ranges={[]}
               className="w-full border-[1px] border-[#CCC2DC] p-4 rounded-2xl hover:border-[1px] hover:border-[#CCC2DC] mb-4"
+              showOneCalendar={isMobile}
               error={error}
               locale={{
                 sunday: 'Su',

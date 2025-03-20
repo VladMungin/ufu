@@ -39,7 +39,9 @@ export const GenerateForms = ({ fields, name }) => {
       )
     } else if (field.type === 'fields_group') {
       if (field.imply_duplicates) {
-        return <GenerateUseFieldArray control={control} fieldsApi={field.fields} name={field.description} stepsName={name}/>
+        return (
+          <GenerateUseFieldArray control={control} fieldsApi={field.fields} name={field.description} stepsName={name} />
+        )
       }
       return (
         <React.Fragment key={index}>
@@ -125,7 +127,7 @@ export const GenerateForms = ({ fields, name }) => {
           <div className="w-full px-4 flex flex-col gap-x-4">
             {(field.type === 'date' || field.type === 'time') && field.accept_interval && (
               <Controller
-                name={`${field.description}-isInterval`}
+                name={`${name}-${field.description}-isInterval`}
                 control={control}
                 render={({ field, fieldState: { error } }) => (
                   <RadioGroup

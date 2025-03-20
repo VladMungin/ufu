@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 
 export const transformData = (dataFromAPI, dataFromForm) => {
+  console.log(dataFromForm)
   return [
     {
       name: dataFromAPI.name,
@@ -37,7 +38,6 @@ export const transformData = (dataFromAPI, dataFromForm) => {
                 })
               }
             })
-            console.log(components)
             return {
               type: field.type,
               components: [
