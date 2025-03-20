@@ -79,7 +79,7 @@ const Constructor = () => {
               />
             </div>
           ) : (
-            <div className="h-[600px] flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF] md:h-[720px] md:h-full">
+            <div className="h-[600px] flex flex-col items-center justify-center shadow-[0px_0px_16px_0px_#95A1FF33] rounded-3xl border border-[#5C5CFF]  md:h-full">
               <img src="/logo.svg" alt="" className="w-1/4" />
               <h3 className="text-xl md:leading-10 text-center md:text-[40px] mt-14 text-[#5C5CFF]">
                 Здесь будет документ
