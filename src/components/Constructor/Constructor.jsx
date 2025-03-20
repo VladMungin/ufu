@@ -51,6 +51,7 @@ const Constructor = () => {
               separator.style.height = '10px' // высота полосы
               separator.style.backgroundColor = '#000' // цвет полосы
               separator.style.width = `${viewport.width}px` // ширина полосы
+              separator.style.maxWidth = '100%'
               separator.style.margin = '0' // убрать отступ
               canvasRef.current.appendChild(separator)
             }
