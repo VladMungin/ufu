@@ -5,53 +5,63 @@ import { Checkbox, DatePicker, DateRangePicker, TimePicker, TimeRangePicker } fr
 import 'rsuite/dist/rsuite.min.css'
 import { InputPhone } from '../components/InputPhone/InputPhone'
 import { Tooltip } from '../components/Tooltip/Tooltip'
+import { TruncateContainer } from '../components/TrunContainer/TrunContainer'
 import { descriptionWithTooltip } from '../helpers/description_with_tooltip'
 
 const GenerateField = ({ type, description, tooltips, field, options, error }) => {
   const { control, watch } = useFormContext()
   if (type.includes('embedded')) {
     const placeholderWidth = description.split('').length
+
+    const maxWidth = '100%'
+
     if (type.includes('date')) {
       return (
-        <DatePicker
-          {...field}
-          ranges={[]}
-          error={error}
-          className="border-b border-black"
-          cleanable={false}
-          placeholder={description}
-          locale={{
-            sunday: 'ВС',
-            monday: 'ПН',
-            tuesday: 'ВТ',
-            wednesday: 'СР',
-            thursday: 'ЧТ',
-            friday: 'ПТ',
-            saturday: 'СБ',
-            ok: 'OK',
-            today: 'Сегодня',
-            yesterday: 'Завтра',
-            hours: 'Часы',
-            minutes: 'Минуты',
-            seconds: 'Секунды',
-            mar: 'Март',
-          }}
-          caretAs={() => null}
-          style={{
-            width: `${placeholderWidth}ch`,
-          }}
-        />
+        <TruncateContainer critWidth={placeholderWidth * 10} text={description}>
+          <DatePicker
+            {...field}
+            ranges={[]}
+            error={error}
+            className="border-b border-black"
+            cleanable={false}
+            placeholder={description}
+            locale={{
+              sunday: 'ВС',
+              monday: 'ПН',
+              tuesday: 'ВТ',
+              wednesday: 'СР',
+              thursday: 'ЧТ',
+              friday: 'ПТ',
+              saturday: 'СБ',
+              ok: 'OK',
+              today: 'Сегодня',
+              yesterday: 'Завтра',
+              hours: 'Часы',
+              minutes: 'Минуты',
+              seconds: 'Секунды',
+              mar: 'Март',
+            }}
+            caretAs={() => null}
+            style={{
+              width: `${placeholderWidth * 10}px`,
+              maxWidth: maxWidth, // Ограничиваем ширину
+            }}
+          />
+        </TruncateContainer>
       )
     }
     return (
-      <Input
-        className="border-b border-black"
-        placeholder={description}
-        {...field}
-        style={{
-          width: `${placeholderWidth}ch`,
-        }}
-      />
+      <TruncateContainer critWidth={placeholderWidth * 10} text={description}>
+        <Input
+          className="border-b border-black"
+          placeholder={description}
+          {...field}
+          style={{
+            width: `${placeholderWidth * 10}px`,
+            maxWidth: maxWidth, // Ограничиваем ширину
+          }}
+        />
+      </TruncateContainer>
     )
   }
   switch (type) {
